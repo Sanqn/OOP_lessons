@@ -59,25 +59,57 @@
 # sinba = Lion()
 # sinba.roar()
 
-class Counter:
-    def start_from(self, start = 0):
-        self.start = start
+# class Counter:
+#     def start_from(self, start = 0):
+#         self.start = start
+#
+#     def increment(self):
+#         self.start += 1
+#
+#     def display(self):
+#         print(f'Текущее значение счетчика = {self.start}')
+#
+#     def reset(self):
+#         self.start = 0
+#
+# c1 = Counter()
+# c1.start_from()
+# c1.increment()
+# c1.display() # печатает "Текущее значение счетчика = 1"
+# c1.increment()
+# c1.display() # печатает "Текущее значение счетчика = 2"
+# c1.reset()
+# c1.display() # печатает "Текущее значение счетчика = 0"
+# from math import sqrt
+# class Point:
+#
+#     def set_coordinates(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#     def get_distance(self, another_point):
+#         if not isinstance(another_point, Point):
+#             return "Передана не точка"
+#         return sqrt((self.x - another_point.x)**2 + (self.y - another_point.y)**2)
+# p1 = Point()
+# p2 = Point()
+# p1.set_coordinates(1, 2)
+# p2.set_coordinates(4, 6)
+# d = p1.get_distance(p2) # вернёт 5.0
+# print(d)
+# print(p1.get_distance(10)) # Распечатает "Передана не точка"
 
-    def increment(self):
-        self.start += 1
+class Laptop:
 
-    def display(self):
-        print(f'Текущее значение счетчика = {self.start}')
+    def __init__(self, brand, model, price):
+        self.brand = brand
+        self.model = model
+        self.price = price
+        self.laptop_name = brand + ' ' + model
 
-    def reset(self):
-        self.start = 0
+hp = Laptop('hp', '15-bw0xx', 57000)
+print(hp.price) # выводит 57000
+print(hp.laptop_name) # выводит "hp 15-bw0xx"
 
-c1 = Counter()
-c1.start_from()
-c1.increment()
-c1.display() # печатает "Текущее значение счетчика = 1"
-c1.increment()
-c1.display() # печатает "Текущее значение счетчика = 2"
-c1.reset()
-c1.display() # печатает "Текущее значение счетчика = 0"
+
 
