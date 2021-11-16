@@ -99,17 +99,80 @@
 # print(d)
 # print(p1.get_distance(10)) # Распечатает "Передана не точка"
 
-class Laptop:
+# class Laptop:
+#
+#     def __init__(self, brand, model, price):
+#         self.brand = brand
+#         self.model = model
+#         self.price = price
+#         self.laptop_name = brand + ' ' + model
+#
+# hp = Laptop('hp', '15-bw0xx', 57000)
+# print(hp.price) # выводит 57000
+# print(hp.laptop_name) # выводит "hp 15-bw0xx"
 
-    def __init__(self, brand, model, price):
-        self.brand = brand
-        self.model = model
-        self.price = price
-        self.laptop_name = brand + ' ' + model
+# class SoccerPlayer:
+#     def __init__(self, name, surname):
+#         self.name = name
+#         self.surname = surname
+#         self.goals = 0
+#         self.assists = 0
+#
+#     def score(self, goals=1):
+#         self.goals += goals
+#
+#     def make_assist(self, assists=1):
+#         self.assists += assists
+#
+#     def statistics(self):
+#         print(f'{self.surname} {self.name} - голы: {self.goals}, передачи: {self.assists}')
+#
+#
+# leo = SoccerPlayer('Leo', 'Messi')
+# leo.score(700)
+# leo.make_assist(500)
+# leo.statistics() # выводит "Messi Leo - голы: 700, передачи: 500"
+# kokorin = SoccerPlayer('Alex', 'Kokorin')
+# kokorin.score()
+# kokorin.statistics() # выводит "Kokorin Alex - голы: 1, передачи: 0"
 
-hp = Laptop('hp', '15-bw0xx', 57000)
-print(hp.price) # выводит 57000
-print(hp.laptop_name) # выводит "hp 15-bw0xx"
+# class Zebra:
+#
+#     def __init__(self):
+#         self.count = 1
+#
+#     def which_stripe(self):
+#         if self.count % 2 != 0:
+#             print('Полоска белая')
+#             self.count += 1
+#         else:
+#             print('Полоска черная')
+#             self.count += 1
+#
+# z1 = Zebra()
+# z1.which_stripe() # печатает "Полоска белая"
+# z1.which_stripe() # печатает "Полоска черная"
+# z1.which_stripe() # печатает "Полоска белая"
+#
+# z2 = Zebra()
+# z2.which_stripe() # печатает "Полоска белая"
 
+class Person:
 
+    def __init__(self, first_name, last_name, age):
+        self.first_name = first_name
+        self.last_name= last_name
+        self.age = age
+
+    def full_name(self):
+        return self.last_name + ' ' + self.first_name
+
+    def is_adult(self):
+        if self.age >= 18:
+            return True
+        return False
+
+p1 = Person('Jimi', 'Hendrix', 55)
+print(p1.full_name())  # выводит "Hendrix Jimi"
+print(p1.is_adult()) # выводит "True"
 
