@@ -131,10 +131,10 @@
 # leo = SoccerPlayer('Leo', 'Messi')
 # leo.score(700)
 # leo.make_assist(500)
-# leo.statistics() # выводит "Messi Leo - голы: 700, передачи: 500"
+# leo.statistics() # output "Messi Leo - голы: 700, передачи: 500"
 # kokorin = SoccerPlayer('Alex', 'Kokorin')
 # kokorin.score()
-# kokorin.statistics() # выводит "Kokorin Alex - голы: 1, передачи: 0"
+# kokorin.statistics() # output "Kokorin Alex - голы: 1, передачи: 0"
 
 # class Zebra:
 #
@@ -150,29 +150,143 @@
 #             self.count += 1
 #
 # z1 = Zebra()
-# z1.which_stripe() # печатает "Полоска белая"
-# z1.which_stripe() # печатает "Полоска черная"
-# z1.which_stripe() # печатает "Полоска белая"
+# z1.which_stripe() # output "Полоска белая"
+# z1.which_stripe() # output "Полоска черная"
+# z1.which_stripe() # output "Полоска белая"
 #
 # z2 = Zebra()
-# z2.which_stripe() # печатает "Полоска белая"
+# z2.which_stripe() # output "Полоска белая"
 
-class Person:
+# class Person:
+#
+#     def __init__(self, first_name, last_name, age):
+#         self.first_name = first_name
+#         self.last_name= last_name
+#         self.age = age
+#
+#     def full_name(self):
+#         return self.last_name + ' ' + self.first_name
+#
+#     def is_adult(self):
+#         if self.age >= 18:
+#             return True
+#         return False
+#
+# p1 = Person('Jimi', 'Hendrix', 55)
+# print(p1.full_name())  # output "Hendrix Jimi"
+# print(p1.is_adult()) # output "True"
 
-    def __init__(self, first_name, last_name, age):
-        self.first_name = first_name
-        self.last_name= last_name
-        self.age = age
 
-    def full_name(self):
-        return self.last_name + ' ' + self.first_name
+# class Point:
+#
+#     def __init__(self, coord_x=0, coord_y=0):
+#         self.x = coord_x
+#         self.y = coord_y
+#
+#     def move_to(self, new_x, new_y):
+#         self.x = new_x
+#         self.y = new_y
+#
+#     def go_home(self):
+#         self.x = 0
+#         self.y = 0
 
-    def is_adult(self):
-        if self.age >= 18:
-            return True
-        return False
+#================================================================================
 
-p1 = Person('Jimi', 'Hendrix', 55)
-print(p1.full_name())  # выводит "Hendrix Jimi"
-print(p1.is_adult()) # выводит "True"
+# class Point:
+#
+#     list_points = []
+#
+#     def __init__(self, coord_x=0, coord_y=0):
+#         self.move_to(coord_x, coord_y)
+#         Point.list_points.append(self)
+#
+#
+#     def move_to(self, new_x, new_y):
+#         self.x = new_x
+#         self.y = new_y
+#
+#     def go_home(self):
+#         self.move_to(0, 0)
+#
+#     def print_point(self):
+#         print(f'distance is {self.x} {self.y}')
+#
+#     def calc_distance(self, another_point):
+#         if not isinstance(another_point, Point):
+#             raise ValueError
+#         return ((self.x - another_point.x)**2 + (self.y - another_point.y)**2)*0.5
+#
+#
+# p1 = Point(1, 1)
+# print(p1.list_points[0].x)
+# p1.move_to(4, 8)
+# p1.print_point()
+# p2 = Point()
+# p2.move_to(2, 3)
+# p2.print_point()
+# print(p1.calc_distance(p2))
+
+
+# class Dog:
+#
+#     def __init__(self, name, age):
+#         self.name = name
+#         self.age = age
+#
+#     def description(self):
+#         return f'{self.name} is {self.age} years old'
+#
+#     def speak(self, sound):
+#         self.sound = sound
+#         return f'{self.name} says {self.sound}'
+#
+# jack = Dog("Jack", 4)
+#
+# print(jack.description()) # распечатает 'Jack is 4 years old'
+# print(jack.speak("Woof Woof")) # распечатает 'Jack says Woof Woof'
+# print(jack.speak("Bow Wow")) # распечатает 'Jack says Bow Wow'
+
+
+class Stack:
+
+    def __init__(self):
+        self.values = []
+
+    def push(self, item):
+        self.values.append(item)
+
+    def pop(self):
+        if len(self.values) != 0:
+            self.values.pop()
+        else:
+            print('Empty Stack')
+
+    def peek(self):
+        if len(self.values) != 0:
+            return self.values[-1]
+        print('Empty Stack')
+        return None
+
+    def is_empty(self):
+        return len(self.values) == 0
+
+    def size(self):
+        return len(self.values)
+
+
+s = Stack()
+s.peek()  # распечатает 'Empty Stack'
+print(s.is_empty())  # распечатает True
+s.push('cat')  # кладем элемент 'cat' на вершину стека
+s.push('dog')  # кладем элемент 'dog' на вершину стека
+print(s.peek())  # распечатает 'dog'
+s.push(True)  # кладем элемент True на вершину стека
+print(s.size())  # распечатает 3
+print(s.is_empty())  # распечатает False
+s.push(777)  # кладем элемент 777 на вершину стека
+print(s.pop())  # удаляем элемент 777 с вершины стека и печатаем его
+print(s.pop())  # удаляем элемент True с вершины стека и печатаем его
+print(s.size())  # распечатает 2
+
 
