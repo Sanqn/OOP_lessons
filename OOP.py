@@ -248,45 +248,106 @@
 # print(jack.speak("Bow Wow")) # распечатает 'Jack says Bow Wow'
 
 
-class Stack:
+# class Stack:
+#
+#     def __init__(self):
+#         self.values = []
+#
+#     def push(self, item):
+#         self.values.append(item)
+#
+#     def pop(self):
+#         if len(self.values) != 0:
+#             self.values.pop()
+#         else:
+#             print('Empty Stack')
+#
+#     def peek(self):
+#         if len(self.values) != 0:
+#             return self.values[-1]
+#         print('Empty Stack')
+#         return None
+#
+#     def is_empty(self):
+#         return len(self.values) == 0
+#
+#     def size(self):
+#         return len(self.values)
+#
+#
+# s = Stack()
+# s.peek()  # распечатает 'Empty Stack'
+# print(s.is_empty())  # распечатает True
+# s.push('cat')  # кладем элемент 'cat' на вершину стека
+# s.push('dog')  # кладем элемент 'dog' на вершину стека
+# print(s.peek())  # распечатает 'dog'
+# s.push(True)  # кладем элемент True на вершину стека
+# print(s.size())  # распечатает 3
+# print(s.is_empty())  # распечатает False
+# s.push(777)  # кладем элемент 777 на вершину стека
+# print(s.pop())  # удаляем элемент 777 с вершины стека и печатаем его
+# print(s.pop())  # удаляем элемент True с
+# # вершины стека и печатаем его
+# print(s.size())  # распечатает 2
 
-    def __init__(self):
-        self.values = []
+# class Cat:
+#
+#     __shared_atr = {
+#         'breed': 'siam',
+#         'color': 'black'
+#     } #__protect atr
+#
+#     def __init__(self):
+#         self.__dict__ = Cat.__shared_atr
+#
+# c1 = Cat()
+# c2 = Cat()
+# c2.age = 5
+# print(c1.__dict__)
+# print(c2.__dict__)
 
-    def push(self, item):
-        self.values.append(item)
+# class BankAccount:
+#
+#     def __init__(self, name, balance, passport):
+#         self.__name = name
+#         self.__balance = balance
+#         self.__passport = passport
+#
+#     # def print_data(self):
+#     #     print(self.name, self.balance, self.passport)
+#
+#     # def print_protected_data(self):
+#     #     print(self._name, self._balance, self._passport)
+#
+#     def print_private_data(self):
+#         print(self.__name, self.__balance, self.__passport) # encapsulation
+#
+# account1 = BankAccount('Tom', 10000, 124519873)
+# account1.print_private_data()
+# # account1.print_protected_data()
+# # account1.print_data()
+# print(account1.__name)# AttributeError: 'BankAccount' object has no attribute '__name'
+# print(account1.__balance)# AttributeError: 'BankAccount' object has no attribute '__balance'
+# print(account1.__passport)# AttributeError: 'BankAccount' object has no attribute '__passport'
 
-    def pop(self):
-        if len(self.values) != 0:
-            self.values.pop()
-        else:
-            print('Empty Stack')
 
-    def peek(self):
-        if len(self.values) != 0:
-            return self.values[-1]
-        print('Empty Stack')
-        return None
+class BankAccount:
 
-    def is_empty(self):
-        return len(self.values) == 0
+    def __init__(self, name, balance, passport):
+        self.__name = name
+        self.__balance = balance
+        self.__passport = passport
 
-    def size(self):
-        return len(self.values)
+    def print_data(self): # but you can print private mathod by open method print_data
+        self.__print_private_data()
 
+    def __print_private_data(self): # private method
+        print(self.__name, self.__balance, self.__passport) # encapsulation
 
-s = Stack()
-s.peek()  # распечатает 'Empty Stack'
-print(s.is_empty())  # распечатает True
-s.push('cat')  # кладем элемент 'cat' на вершину стека
-s.push('dog')  # кладем элемент 'dog' на вершину стека
-print(s.peek())  # распечатает 'dog'
-s.push(True)  # кладем элемент True на вершину стека
-print(s.size())  # распечатает 3
-print(s.is_empty())  # распечатает False
-s.push(777)  # кладем элемент 777 на вершину стека
-print(s.pop())  # удаляем элемент 777 с вершины стека и печатаем его
-print(s.pop())  # удаляем элемент True с вершины стека и печатаем его
-print(s.size())  # распечатает 2
-
+account1 = BankAccount('Tom', 10000, 124519873)
+account1.print_data()
+print(dir(account1)) #['_BankAccount__balance', '_BankAccount__name', '_BankAccount__passport', '_BankAccount__print_private_data'....]
+print(account1._BankAccount__name)
+print(account1._BankAccount__passport)
+print(account1._BankAccount__balance)
 
