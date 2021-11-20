@@ -331,23 +331,310 @@
 # print(account1.__passport)# AttributeError: 'BankAccount' object has no attribute '__passport'
 
 
-class BankAccount:
+# class BankAccount:
+#
+#     def __init__(self, name, balance, passport):
+#         self.__name = name
+#         self.__balance = balance
+#         self.__passport = passport
+#
+#     def print_data(self): # but you can print private mathod by open method print_data
+#         self.__print_private_data()
+#
+#     def __print_private_data(self): # private method
+#         print(self.__name, self.__balance, self.__passport) # encapsulation
+#
+# account1 = BankAccount('Tom', 10000, 124519873)
+# account1.print_data()
+# print(dir(account1)) #['_BankAccount__balance', '_BankAccount__name', '_BankAccount__passport', '_BankAccount__print_private_data'....]
+# print(account1._BankAccount__name)
+# print(account1._BankAccount__passport)
+# print(account1._BankAccount__balance)
 
-    def __init__(self, name, balance, passport):
-        self.__name = name
-        self.__balance = balance
-        self.__passport = passport
+#Property getattr and setter method+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    def print_data(self): # but you can print private mathod by open method print_data
-        self.__print_private_data()
+# class BankAccount:
+#
+#     def __init__(self, name, balance):
+#         self.__name = name
+#         self.__balance = balance
+#
+#
+#     def get_balance(self):
+#         return self.__balance
+#
+#
+#     def set_balance(self, value):
+#         if not isinstance(value, (int, float)):
+#             raise ValueError('Balance muct be number')
+#         self.__balance = value
+#
+#     def del_balance(self):
+#         del self.__balance
+#
+#     balance = property(fget=get_balance, fset=set_balance, fdel=del_balance)
+#
+# # a1 = BankAccount('Nick', 1000)
+# # print(a1.get_balance())
+# # a1.set_balance(1500)
+# # print(a1.get_balance())
+# # a1.set_balance('hello')
+# # print(a1.get_balance())
+#
+# a1 = BankAccount('Nick', 1000)
+# print(a1.balance)
+# a1.balance = 500
+# print(a1.balance)
+# del a1.balance
+# a1.balance = 777
+# print(a1.balance)
 
-    def __print_private_data(self): # private method
-        print(self.__name, self.__balance, self.__passport) # encapsulation
+# class UserMail:
+#
+#     def __init__(self, login, email):
+#         self.login = login
+#         self.__email = email
+#
+#     def get_email(self):
+#         return self.__email
+#
+#     def set_email(self, new_mail):
+#         if isinstance(new_mail, str) \
+#                 and new_mail.count('@') == 1 \
+#                 and '.' in new_mail[new_mail.find('@'):]:
+#             self.__email = new_mail
+#         else:
+#             print('Ошибочная почта')
+#
+#     email = property(fget=get_email, fset=set_email)
+#
+# k = UserMail('belosnezhka', 'prince@wait.you')
+# print(k.email)  # prince@wait.you
+# k.email = [1, 2, 3] # Ошибочная почта
+# k.email = 'prince@still@.wait'  # Ошибочная почта
+# k.email = 'prince@still.wait'
+# print(k.email)  # prince@still.wait
 
-account1 = BankAccount('Tom', 10000, 124519873)
-account1.print_data()
-print(dir(account1)) #['_BankAccount__balance', '_BankAccount__name', '_BankAccount__passport', '_BankAccount__print_private_data'....]
-print(account1._BankAccount__name)
-print(account1._BankAccount__passport)
-print(account1._BankAccount__balance)
+# import re
+# class UserMail:
+#
+#     def __init__(self, login, email):
+#         self.login = login
+#         self.__email = email
+#
+#     def get_email(self):
+#         return self.__email
+#
+#     def set_email(self, new_mail):
+#         if isinstance(new_mail, str) and re.match(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)+$', new_mail):
+#             self.__email = new_mail
+#         else:
+#             print('Ошибочная почта')
+#
+#     email = property(fget=get_email, fset=set_email)
+#
+# k = UserMail('belosnezhka', 'prince@wait.you')
+# print(k.email)  # prince@wait.you
+# k.email = [1, 2, 3] # Ошибочная почта
+# k.email = 'prince@still@.wait'  # Ошибочная почта
+# k.email = 'prince@still.wait'
+# print(k.email)  # prince@still.wait
 
+# class BankAccount:
+#
+#     def __init__(self, name, balance):
+#         self.__name = name
+#         self.__balance = balance
+#
+#     @property
+#     def my_balance(self):
+#         return self.__balance
+#
+#     @my_balance.setter
+#     def my_balance(self, value):
+#         if not isinstance(value, (int, float)):
+#             raise ValueError('Balance must be number')
+#         self.__balance = value
+#
+#     @my_balance.deleter
+#     def my_balance(self):
+#         del self.__balance
+#
+#
+# a1 = BankAccount('Nick', 1000)
+# print(a1.my_balance)
+# a1.my_balance = 500
+# print(a1.my_balance)
+# a1.my_balance = 777
+# print(a1.my_balance)
+# del a1.my_balance
+# print(a1.__dict__)
+
+#Magic method __str__ and __repr__ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# class Lion:
+#
+#     def __init__(self, name):
+#         self.name = name
+#
+#     # def __repr__(self):
+#     #     return f'The object Lion - {self.name}'
+#
+#     def __str__(self):
+#         return f'The Lion - {self.name}'
+#     @property
+#     def ime(self):
+#         return self.name
+#
+# l = Lion(10)
+# l # The object Lion - Simba output in console
+# print(l)# The Lion - Simba
+# print(l.ime)
+
+
+# class Money:
+#
+#     def __init__(self, dollars, cents):
+#         self.total_cents = dollars * 100 + cents
+#
+#     @property
+#     def dollars(self):
+#         return self.total_cents // 100
+#
+#     @dollars.setter
+#     def dollars(self, value):
+#         if isinstance(value, int) and value >=0:
+#             self.total_cents = self.total_cents % 100 + value * 100
+#         else:
+#             print('Error dollars')
+#
+#     @property
+#     def cents(self):
+#         return self.total_cents % 100
+#
+#     @cents.setter
+#     def cents(self, value_cent):
+#         if isinstance(value_cent, int) and 0 <= value_cent < 100:
+#             self.total_cents = self.total_cents // 100 * 100 + value_cent
+#         else:
+#             print('Error cents')
+#
+#     def __str__(self):
+#         return f'Ваше состояние составляет {self.dollars} долларов {self.cents} центов'
+#
+# Bill = Money(1512, 99)
+# print(Bill)  # Ваше состояние составляет 101 долларов 99 центов
+# print(Bill.dollars, Bill.cents)  # 101 99
+# Bill.dollars = 666
+# print(Bill)  # Ваше состояние составляет 666 долларов 99 центов
+# Bill.cents = 12
+# print(Bill)  # Ваше состояние составляет 666 долларов 12 центов
+
+# class Square:
+#
+#     def __init__(self, side):
+#         self.__side = side
+#         self.__area = None
+#
+#     @property
+#     def side(self):
+#         return self.__side
+#
+#     @side.setter
+#     def side(self, value):
+#         self.__side = value
+#         self.__area = None
+#
+#     @property
+#     def area(self):
+#         if self.__area is None:
+#             print('Calculate')
+#             self.__area = self.__side**2
+#         return self.__area
+#
+# a1 = Square(5)
+# print(a1.side)
+# a1.side = 5
+# print(a1.area)
+# a1.side = 5
+# print(a1.area)
+
+# class Perimetr:
+#
+#     def __init__(self, side_1, side_2):
+#         self.__side_1 = side_1
+#         self.__side_2 = side_2
+#         self.__perim = None
+#
+#     @property
+#     def side(self):
+#         return self.__side_1, self.__side_2
+#
+#     @side.setter
+#     def side(self, arg):
+#         self.__side_1, self.__side_2 = arg
+#         self.__perim = None
+#
+#     @property
+#     def perim(self):
+#         if self.__perim is None:
+#             print('tcnm')
+#             self.__perim = self.__side_1 * 2 + self.__side_2 * 2
+#         return self.__perim
+#
+# p1 = Perimetr(3, 4)
+# print(p1.perim)
+# p2 = Perimetr(5, 6)
+# print(p2.perim)
+# p2.side = 7, 8
+# print(p2.perim)
+
+#@staticmethod and @staticmethod++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# class Example:
+#
+#     def hello():
+#         print('Hello') # only Example.hello()
+#
+#     def instance_hello(self):
+#         print(f'Hello instance {self}') # only d = Example() => d.instance_hello
+#
+#     @staticmethod
+#     def static_print():
+#         print('Hello static')
+#
+#     @classmethod
+#     def class_hello(self):
+#         print(f'Hello class {self}')
+#
+# Example.static_print()
+# a = Example()
+# a.static_print()
+# Example.class_hello()
+# b = Example()
+# b.class_hello()
+
+class Robot:
+    population = 0
+
+    def __init__(self, name):
+        self.name = name
+        print(f'Робот {self.name} был создан')
+        Robot.population += 1
+
+    def destroy(self):
+        print(f'Робот {self.name} был уничтожен')
+        del self.name
+        Robot.population -= 1
+
+    def say_hello(self):
+        print(f'Робот {self.name} приветствует тебя, особь человеческого рода')
+
+    @classmethod
+    def how_many(self):
+        print(f'{self.population}, вот сколько нас еще осталось')
+
+r2 = Robot("R2-D2") # печатает "Робот R2-D2 был создан"
+r2.say_hello() # печатает "Робот R2-D2 приветствует тебя, особь человеческого рода"
+Robot.how_many() # печатает "1, вот сколько нас еще осталось"
+r2.destroy() # печатает "Робот R2-D2 был уничтожен"
