@@ -614,27 +614,119 @@
 # b = Example()
 # b.class_hello()
 
-class Robot:
-    population = 0
+# class Robot:
+#     population = 0
+#
+#     def __init__(self, name):
+#         self.name = name
+#         print(f'Робот {self.name} был создан')
+#         Robot.population += 1
+#
+#     def destroy(self):
+#         print(f'Робот {self.name} был уничтожен')
+#         del self.name
+#         Robot.population -= 1
+#
+#     def say_hello(self):
+#         print(f'Робот {self.name} приветствует тебя, особь человеческого рода')
+#
+#     @classmethod
+#     def how_many(self):
+#         print(f'{self.population}, вот сколько нас еще осталось')
+#
+# r2 = Robot("R2-D2") # печатает "Робот R2-D2 был создан"
+# r2.say_hello() # печатает "Робот R2-D2 приветствует тебя, особь человеческого рода"
+# Robot.how_many() # печатает "1, вот сколько нас еще осталось"
+# r2.destroy() # печатает "Робот R2-D2 был уничтожен"
 
-    def __init__(self, name):
-        self.name = name
-        print(f'Робот {self.name} был создан')
-        Robot.population += 1
+# class DepartamentIT:
+#     PYTHON_DEV = 3
+#     GO_DEV = 3
+#     REACT_DEV = 2
+#
+#     @classmethod
+#     def info_class(cls):
+#         print(cls.PYTHON_DEV, cls.GO_DEV, cls.REACT_DEV)
+#
+#     @staticmethod
+#     def info_stat():
+#         print(DepartamentIT.PYTHON_DEV, DepartamentIT.GO_DEV, DepartamentIT.REACT_DEV)
+#
+#     @property
+#     def info_prop(self):
+#         print(self.PYTHON_DEV, self.GO_DEV, self.REACT_DEV)
+#
+#     def info(self):
+#         print(DepartamentIT.PYTHON_DEV, DepartamentIT.GO_DEV, DepartamentIT.REACT_DEV)
+#
+#     def make_backend(self):
+#         print('Python and Go')
+#
+#     def make_fronend(self):
+#         print('React')
+#
+#     def hiring_dev_python(self):
+#         DepartamentIT.PYTHON_DEV += 1
+#
+# itl = DepartamentIT()
+# itl.info_prop
+# itl.hiring_dev_python()
+# print(itl.PYTHON_DEV)
 
-    def destroy(self):
-        print(f'Робот {self.name} был уничтожен')
-        del self.name
-        Robot.population -= 1
+class User:
 
-    def say_hello(self):
-        print(f'Робот {self.name} приветствует тебя, особь человеческого рода')
+    def __init__(self, login, password):
+        self.login = login
+        self.password = password
+        self.__secret_cod = 'You are good chel'
 
-    @classmethod
-    def how_many(self):
-        print(f'{self.population}, вот сколько нас еще осталось')
+    @property
+    def get_secret(self):
+        s = input('input your pass')
+        if s == self.password:
+            return self.__secret_cod
+        else:
+            raise ValueError('you input not that password')
 
-r2 = Robot("R2-D2") # печатает "Робот R2-D2 был создан"
-r2.say_hello() # печатает "Робот R2-D2 приветствует тебя, особь человеческого рода"
-Robot.how_many() # печатает "1, вот сколько нас еще осталось"
-r2.destroy() # печатает "Робот R2-D2 был уничтожен"
+    @property
+    def password(self):
+        return self.__password
+
+    @staticmethod
+    def check_pass(password):
+        for i in '0123456789':
+            if i in password:
+                return True
+        return False
+
+    @staticmethod
+    def simple_pass(password):
+        file = open('simple_pas.txt', encoding='utf-8').read()
+        for name in file:
+            if name in password:
+               return True
+        return False
+
+    @password.setter
+    def password(self, value):
+        if not isinstance(value, str):
+            raise TypeError('password must be string')
+        if len(value) < 4:
+            raise ValueError('password must be more then 4 letters')
+        if len(value) > 12:
+            raise ValueError('password must be less then 12 letters')
+        if not User.check_pass(value):
+            raise ValueError('password must include digits')
+        if not User.simple_pass(value):
+            raise ValueError('password is very simple')
+        self.__password = value
+
+s1 = User('Nick', 'ter457')
+# s1.password = 'ter457'
+print(s1.password)
+print(s1.get_secret)
+
+
+
+
+
