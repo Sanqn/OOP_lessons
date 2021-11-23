@@ -191,7 +191,7 @@
 #         self.x = 0
 #         self.y = 0
 
-#================================================================================
+# ================================================================================
 
 # class Point:
 #
@@ -351,7 +351,7 @@
 # print(account1._BankAccount__passport)
 # print(account1._BankAccount__balance)
 
-#Property getattr and setter method+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Property getattr and setter method+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # class BankAccount:
 #
@@ -470,7 +470,7 @@
 # del a1.my_balance
 # print(a1.__dict__)
 
-#Magic method __str__ and __repr__ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Magic method __str__ and __repr__ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # class Lion:
 #
@@ -589,7 +589,7 @@
 # p2.side = 7, 8
 # print(p2.perim)
 
-#@staticmethod and @staticmethod++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# @staticmethod and @staticmethod++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # class Example:
 #
@@ -673,60 +673,79 @@
 # itl.hiring_dev_python()
 # print(itl.PYTHON_DEV)
 
-class User:
+# class User:
+#
+#     def __init__(self, login, password):
+#         self.login = login
+#         self.password = password
+#         self.__secret_cod = 'You are good chel'
+#
+#     @property
+#     def get_secret(self):
+#         s = input('input your pass')
+#         if s == self.password:
+#             return self.__secret_cod
+#         else:
+#             raise ValueError('you input not that password')
+#
+#     @property
+#     def password(self):
+#         return self.__password
+#
+#     @staticmethod
+#     def check_pass(password):
+#         for i in '0123456789':
+#             if i in password:
+#                 return True
+#         return False
+#
+#     @staticmethod
+#     def simple_pass(password):
+#         file = open('simple_pas.txt', encoding='utf-8').read()
+#         for name in file:
+#             if not name in password:
+#                 return True
+#         return False
+#
+#     @password.setter
+#     def password(self, value):
+#         if not isinstance(value, str):
+#             raise TypeError('password must be string')
+#         if len(value) < 4:
+#             raise ValueError('password must be more then 4 letters')
+#         if len(value) > 12:
+#             raise ValueError('password must be less then 12 letters')
+#         if not User.check_pass(value):
+#             raise ValueError('password must include digits')
+#         if not User.simple_pass(value):
+#             raise ValueError('пароль простой')
+#         self.__password = value
+#
+#
+# s1 = User('Nick', 'Chegg123')
+# # s1.password = 'ter457'
+# print(s1.password)
 
-    def __init__(self, login, password):
-        self.login = login
-        self.password = password
-        self.__secret_cod = 'You are good chel'
+class Person:
 
-    @property
-    def get_secret(self):
-        s = input('input your pass')
-        if s == self.password:
-            return self.__secret_cod
+    def __init__(self, name, surname, gender='male'):
+        self.name = name
+        self.surname = surname
+        self.gender = gender
+        if 'female' != gender != 'male':
+            self.gender = 'male'
+            print(f'Не знаю, что вы имели ввиду? Пусть это будет мальчик!')
+
+    def __str__(self):
+        if self.gender == 'male':
+            return f'Гражданин {self.surname} {self.name}'
+        elif self.gender == 'female':
+            return f'Гражданка {self.surname} {self.name}'
         else:
-            raise ValueError('you input not that password')
-
-    @property
-    def password(self):
-        return self.__password
-
-    @staticmethod
-    def check_pass(password):
-        for i in '0123456789':
-            if i in password:
-                return True
-        return False
-
-    @staticmethod
-    def simple_pass(password):
-        file = open('simple_pas.txt', encoding='utf-8').read()
-        for name in file:
-            if name in password:
-               return True
-        return False
-
-    @password.setter
-    def password(self, value):
-        if not isinstance(value, str):
-            raise TypeError('password must be string')
-        if len(value) < 4:
-            raise ValueError('password must be more then 4 letters')
-        if len(value) > 12:
-            raise ValueError('password must be less then 12 letters')
-        if not User.check_pass(value):
-            raise ValueError('password must include digits')
-        if not User.simple_pass(value):
-            raise ValueError('password is very simple')
-        self.__password = value
-
-s1 = User('Nick', 'ter457')
-# s1.password = 'ter457'
-print(s1.password)
-print(s1.get_secret)
+            self.gender = 'male'
 
 
 
 
-
+p3 = Person('Оби-Ван', 'Кеноби', True)# печатает "Не знаю, что вы имели ввиду? Пусть это будет мальчик!"
+print(p3) # печатает "Гражданин Кеноби Оби-Ван"
