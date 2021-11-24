@@ -726,26 +726,76 @@
 # # s1.password = 'ter457'
 # print(s1.password)
 
+# class Person:
+#
+#     def __init__(self, name, surname, gender='male'):
+#         self.name = name
+#         self.surname = surname
+#         self.gender = gender
+#         if 'female' != gender != 'male':
+#             self.gender = 'male'
+#             print(f'Не знаю, что вы имели ввиду? Пусть это будет мальчик!')
+#
+#     def __str__(self):
+#         if self.gender == 'male':
+#             return f'Гражданин {self.surname} {self.name}'
+#         elif self.gender == 'female':
+#             return f'Гражданка {self.surname} {self.name}'
+#         else:
+#             self.gender = 'male'
+# p3 = Person('Оби-Ван', 'Кеноби', True)# печатает "Не знаю, что вы имели ввиду? Пусть это будет мальчик!"
+# print(p3) # печатает "Гражданин Кеноби Оби-Ван"
+
+# class Vector:
+#
+#     def __init__(self, *args):
+#         self.values = []
+#         for i in args:
+#             if isinstance(i, int):
+#                     self.values.append(i)
+#
+#     def __str__(self):
+#         if len(self.values):
+#             return f"Вектор{tuple(sorted(self.values))}"
+#         else:
+#             return f'Пустой вектор'
+#
+#
+# v1 = Vector(4,1,3,5,2,8,2,6,8,4,2)
+# print(v1)  # печатает "Вектор(1, 2, 3)"
+# v2 = Vector()
+# print(v2)  # печатает "Пустой вектор"
+
+
+#__len__ and __abs__++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 class Person:
 
-    def __init__(self, name, surname, gender='male'):
+    def __init__(self, name, surname):
         self.name = name
         self.surname = surname
-        self.gender = gender
-        if 'female' != gender != 'male':
-            self.gender = 'male'
-            print(f'Не знаю, что вы имели ввиду? Пусть это будет мальчик!')
 
-    def __str__(self):
-        if self.gender == 'male':
-            return f'Гражданин {self.surname} {self.name}'
-        elif self.gender == 'female':
-            return f'Гражданка {self.surname} {self.name}'
-        else:
-            self.gender = 'male'
+    def __len__(self):
+        return len(self.name + self.surname)
 
 
+# p1 = Person('aaaa', 'vvvev')
+# print(len(p1))
 
+class Otrezok:
 
-p3 = Person('Оби-Ван', 'Кеноби', True)# печатает "Не знаю, что вы имели ввиду? Пусть это будет мальчик!"
-print(p3) # печатает "Гражданин Кеноби Оби-Ван"
+    def __init__(self, point, point2):
+        self.point = point
+        self.point2 = point2
+
+    def __len__(self):
+        return abs(self.point2 - self.point)
+        #return abs(self) #or abs(self.point2 - self.point)
+
+    def __abs__(self):
+        return abs(self.point2 - self.point)
+
+p2 = Otrezok(5, 9)
+print(len(p2))
+p3 = Otrezok(9, 5)
+print(len(p2))
+print(abs(p3))
