@@ -870,73 +870,136 @@
 # print(id(t1), id(d))
 # print(t1 + d)
 #
-class Vector:
-
-    def __init__(self, *args):
-        self.values = sorted([i for i in args if isinstance(i, int)])
-
-    def __str__(self):
-        if self.values:
-            return f"Вектор{tuple(self.values)}"
-        else:
-            return f"Пустой вектор"
-
-    def __add__(self, other):
-        if isinstance(other, int):
-            return Vector(*(i + other for i in self.values))
-
-        if isinstance(other, Vector) and len(self.values) == len(other.values):
-            return Vector(*(map(sum, zip(self.values, other.values))))
-
-        if isinstance(other, Vector) and len(self.values) != len(other.values):
-            print("Сложение векторов разной длины недопустимо")
-
-        else:
-            print(f"Вектор нельзя сложить с {other}")
-
-    def __mul__(self, other):
-        if isinstance(other, int):
-            return Vector(*(i * other for i in self.values))
-
-        if isinstance(other, Vector) and len(self.values) == len(other.values):
-            return Vector(*(x*y for x,y in zip(self.values, other.values)))
-
-        if isinstance(other, Vector) and len(self.values) != len(other.values):
-            print("Умножение векторов разной длины недопустимо")
-
-        else:
-            print(f"Вектор нельзя умножать с {other}")
-
-
-
-v1 = Vector(1, 2, 3)
-print(v1)  # печатает "Вектор(1, 2, 3)"
-v2 = Vector(3, 4, 5)
-print(v2)  # печатает "Вектор(3, 4, 5)"
-v3 = v1 + v2
-print(v3)  # печатает "Вектор(4, 6, 8)"
-v4 = v3 + [1, 2, 8]
-print(v4)  # печатает "Вектор(9, 11, 13)"
-
-# a = (3, 4, 5)
-# b = 5
-# print([b + i for i in a])
-
-# class Sum:
+# class Vector:
 #
-#     def __init__(self, balance):
-#         self.balance = balance
+#     def __init__(self, *args):
+#         self.values = sorted([i for i in args if isinstance(i, int)])
 #
 #     def __str__(self):
-#         return f'вот {self.balance}'
+#         if self.values:
+#             return f"Вектор{tuple(self.values)}"
+#         else:
+#             return f"Пустой вектор"
 #
 #     def __add__(self, other):
 #         if isinstance(other, int):
-#             return Sum(self.balance + other)
-#         if isinstance(other, Sum):
-#             return self.balance + other.balance
+#             return Vector(*(i + other for i in self.values))
 #
-# p = Sum(1000)
-# p1 = Sum(50)
-# print(p)
-# print(p+p1)
+#         if isinstance(other, Vector) and len(self.values) == len(other.values):
+#             return Vector(*(map(sum, zip(self.values, other.values))))
+#
+#         if isinstance(other, Vector) and len(self.values) != len(other.values):
+#             print("Сложение векторов разной длины недопустимо")
+#
+#         else:
+#             print(f"Вектор нельзя сложить с {other}")
+#
+#     def __mul__(self, other):
+#         if isinstance(other, int):
+#             return Vector(*(i * other for i in self.values))
+#
+#         if isinstance(other, Vector) and len(self.values) == len(other.values):
+#             return Vector(*(x*y for x,y in zip(self.values, other.values)))
+#
+#         if isinstance(other, Vector) and len(self.values) != len(other.values):
+#             print("Умножение векторов разной длины недопустимо")
+#
+#         else:
+#             print(f"Вектор нельзя умножать с {other}")
+#
+#
+#
+# v1 = Vector(1, 2, 3)
+# print(v1)  # печатает "Вектор(1, 2, 3)"
+# v2 = Vector(3, 4, 5)
+# print(v2)  # печатает "Вектор(3, 4, 5)"
+# v3 = v1 + v2
+# print(v3)  # печатает "Вектор(4, 6, 8)"
+# v4 = v3 + [1, 2, 8]
+# print(v4)  # печатает "Вектор(9, 11, 13)"
+
+
+
+#Magic method++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# __eq__ ==  '=='
+# __ne__ ==  '!='
+# __lt__ ==  '<'
+# __le__ ==  '<='
+# __gt__ ==  '>'
+# __ge__ ==  '>='
+
+# class Rectangle:
+#
+#     def __init__(self, a, b):
+#         self.a = a
+#         self.b = b
+#
+#     @property
+#     def area(self):
+#         return self.a * self.b
+#
+#     def __eq__(self, other):
+#         if isinstance(other, Rectangle):
+#             return self.a == other.a and self.b == other.b
+#
+#     def __lt__(self, other):
+#         if isinstance(other, Rectangle):
+#             return self.area < other.area
+#         elif isinstance(other, (int, float)):
+#             return self.area < other
+#
+#     def __le__(self, other):
+#         return self==other or self<other
+#
+# q1 = Rectangle(1, 2)
+# q2 = Rectangle(1, 2)
+# print(q1==q2)
+# print(q1.area)
+# print(q1<=q2)
+# print(q1<15)
+
+class ChessPlayer:
+
+    def __init__(self, name, surname, rating):
+        self.name = name
+        self.surname = surname
+        self.rating = rating
+
+    def __eq__(self, other):
+        if isinstance(other, ChessPlayer):
+            return self.rating == other.rating
+        if isinstance(other, int):
+            return self.rating == other
+        return f'Невозможно выполнить сравнение'
+
+    def __gt__(self, other):
+        if isinstance(other, ChessPlayer):
+            return self.rating > other.rating
+        if isinstance(other, int):
+            return self.rating > other
+        return f'Невозможно выполнить сравнение'
+
+    def __lt__(self, other):
+        if isinstance(other, ChessPlayer):
+            return self.rating < other.rating
+        if isinstance(other, int):
+            return self.rating < other
+        return f'Невозможно выполнить сравнение'
+
+
+
+magnus = ChessPlayer('Carlsen', 'Magnus', 2847)
+ian = ChessPlayer('Ian', 'Nepomniachtchi', 2789)
+print(magnus == 4000) # False
+print(ian == 2789) # True
+print(magnus == ian) # False
+print(magnus > ian) # True
+print(magnus < ian) # False
+print(magnus < [1, 2]) # печатает "Невозможно выполнить сравнениe"
+
+
+
+
+
+
+
