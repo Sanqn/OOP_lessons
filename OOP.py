@@ -767,35 +767,176 @@
 # print(v2)  # печатает "Пустой вектор"
 
 
-#__len__ and __abs__++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-class Person:
+##__len__ and __abs__++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# class Person:
+#
+#     def __init__(self, name, surname):
+#         self.name = name
+#         self.surname = surname
+#
+#     def __len__(self):
+#         return len(self.name + self.surname)
+#
+#
+# # p1 = Person('aaaa', 'vvvev')
+# # print(len(p1))
+#
+# class Point:
+#
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#     def __str__(self):
+#         return self.x, self.y
+#
+# class Otrezok:
+#
+#     def __init__(self, point, point2):
+#         self.point = point
+#         self.point2 = point2
+#
+#     def __len__(self):
+#         return abs(self.point2 - self.point)
+#         #return abs(self) #or abs(self.point2 - self.point)
+#
+#     def __abs__(self):
+#         dx = abs(self.point2.x - self.point.x)
+#         dy = abs(self.point2.y - self.point.y)
+#         return abs(dy + dx)
+#
+# x = Point(0, 0)
+# y = Point(4, 6)
+# xy = Otrezok(x, y)
+# print(abs(xy))
 
-    def __init__(self, name, surname):
-        self.name = name
-        self.surname = surname
+# __add__(+), __mul__(*), __sub__(-) и __truediv__(/)++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    def __len__(self):
-        return len(self.name + self.surname)
+# class BankAcount:
+#
+#     def __init__(self, name, balance):
+#         self.name = name
+#         self.balance = balance
+#
+#     def __add__(self, other):
+#         if isinstance(other, (int, float)):
+#             return self.balance + other
+#         if isinstance(other, BankAcount):
+#             return self.balance + other.balance
+#         raise NotImplemented
+#
+#     def __mul__(self, other):
+#         if isinstance(other, (int, float)):
+#             return self.balance * other
+#         if isinstance(other, BankAcount):
+#             return self.balance * other.balance
+#         if isinstance(other, str):
+#             return self.name + other
+#         raise NotImplemented
+#
+#     def __radd__(self, other):
+#         print('radd')
+#         return self + other
+#
+# t1 = BankAcount('Tom', 530)
+# print(t1+500) #1030
+# print(500 + t1)
+# print(t1 + 30)
+# print(t1*50)
+# print(t1*'Nick')
+
+# class BankAcount:
+#
+#     def __init__(self, name, balance):
+#         print('New object')
+#         self.name = name
+#         self.balance = balance
+#
+#     def __repr__(self):
+#         return f'Customer name is {self.name}, balance: {self.balance}'
+#
+#     def __add__(self, other):
+#         print('add __call__')
+#         if isinstance(other, (int, float)):
+#             return BankAcount(self.name, self.balance + other)
+#         if isinstance(other, BankAcount):
+#             return self.balance + other.balance
+#         raise NotImplemented
+#
+# t1 = BankAcount('John', 1000)
+# print(t1 + 11)
+# d = t1 + 20
+# print(d)
+# print(id(t1), id(d))
+# print(t1 + d)
+#
+class Vector:
+
+    def __init__(self, *args):
+        self.values = sorted([i for i in args if isinstance(i, int)])
+
+    def __str__(self):
+        if self.values:
+            return f"Вектор{tuple(self.values)}"
+        else:
+            return f"Пустой вектор"
+
+    def __add__(self, other):
+        if isinstance(other, int):
+            return Vector(*(i + other for i in self.values))
+
+        if isinstance(other, Vector) and len(self.values) == len(other.values):
+            return Vector(*(map(sum, zip(self.values, other.values))))
+
+        if isinstance(other, Vector) and len(self.values) != len(other.values):
+            print("Сложение векторов разной длины недопустимо")
+
+        else:
+            print(f"Вектор нельзя сложить с {other}")
+
+    def __mul__(self, other):
+        if isinstance(other, int):
+            return Vector(*(i * other for i in self.values))
+
+        if isinstance(other, Vector) and len(self.values) == len(other.values):
+            return Vector(*(x*y for x,y in zip(self.values, other.values)))
+
+        if isinstance(other, Vector) and len(self.values) != len(other.values):
+            print("Умножение векторов разной длины недопустимо")
+
+        else:
+            print(f"Вектор нельзя умножать с {other}")
 
 
-# p1 = Person('aaaa', 'vvvev')
-# print(len(p1))
 
-class Otrezok:
+v1 = Vector(1, 2, 3)
+print(v1)  # печатает "Вектор(1, 2, 3)"
+v2 = Vector(3, 4, 5)
+print(v2)  # печатает "Вектор(3, 4, 5)"
+v3 = v1 + v2
+print(v3)  # печатает "Вектор(4, 6, 8)"
+v4 = v3 + [1, 2, 8]
+print(v4)  # печатает "Вектор(9, 11, 13)"
 
-    def __init__(self, point, point2):
-        self.point = point
-        self.point2 = point2
+# a = (3, 4, 5)
+# b = 5
+# print([b + i for i in a])
 
-    def __len__(self):
-        return abs(self.point2 - self.point)
-        #return abs(self) #or abs(self.point2 - self.point)
-
-    def __abs__(self):
-        return abs(self.point2 - self.point)
-
-p2 = Otrezok(5, 9)
-print(len(p2))
-p3 = Otrezok(9, 5)
-print(len(p2))
-print(abs(p3))
+# class Sum:
+#
+#     def __init__(self, balance):
+#         self.balance = balance
+#
+#     def __str__(self):
+#         return f'вот {self.balance}'
+#
+#     def __add__(self, other):
+#         if isinstance(other, int):
+#             return Sum(self.balance + other)
+#         if isinstance(other, Sum):
+#             return self.balance + other.balance
+#
+# p = Sum(1000)
+# p1 = Sum(50)
+# print(p)
+# print(p+p1)
