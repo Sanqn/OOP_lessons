@@ -999,34 +999,99 @@
 
 #method eq and hash++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-class Point:
+# class Point:
+#
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#     def __eq__(self, other):
+#         return isinstance(other, Point) and \
+#                self.x == other.x and self.y == other.y
+#
+#     def __hash__(self):
+#         return hash(id(self)) #hash((self.x, self.y))
+#
+#     def __repr__(self):
+#         return f'{self.x}, {self.y}'
+#
+# d = {}
+# p1 = Point(1, 2)
+# p2 = Point(1, 2)
+# print(p1==p2)
+# print(hash(p1))
+# print(hash(p2))
+# d[p1] = 100
+# d[p2] = 200
+# print(d) #{1, 2: 100, 1, 2: 200}
 
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
 
-    def __eq__(self, other):
-        return isinstance(other, Point) and \
-               self.x == other.x and self.y == other.y
+#__bool__+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    def __hash__(self):
-        return hash(id(self)) #hash((self.x, self.y))
+# class Point:
+#
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#     def __len__(self):
+#         print('len___')
+#         return abs(self.x - self.y)
+#
+#     def __bool__(self):
+#         if self.x != 0 or self.y != 0:
+#             print('bool___')
+#             return True
+#         return False
+#
+#
+# p1 = Point(1, 0)
+# print(bool(p1))
 
-    def __repr__(self):
-        return f'{self.x}, {self.y}'
+# class City:
+#
+#     def __init__(self, name):
+#         self.name = name.title() #''.join([word[0].upper() + word[1:] for word in name])
+#
+#     def __str__(self):
+#         return f'{self.name}'
+#
+#     def __bool__(self):
+#         if self.name[-1] in 'a, e, i, o, u':
+#             return False
+#         return True
 
-d = {}
-p1 = Point(1, 2)
-p2 = Point(1, 2)
-print(p1==p2)
-print(hash(p1))
-print(hash(p2))
-d[p1] = 100
-d[p2] = 200
-print(d) #{1, 2: 100, 1, 2: 200}
+# p1 = City('new york')
+# print(p1)  # печатает "New York"
+# print(bool(p1))  # печатает "True"
+# p2 = City('SaN frANCISk')
+# print(p2)  # печатает "San Francisco"
+# print(p1 == True)  # печатает "False"
+
+class Quadrilateral:
+
+    def __init__(self, *args):
+        if len(args) == 1:
+            self.width = args[0]
+            self.height = args[0]
+        else:
+            self.width, self.height = args
+
+    def __str__(self):
+        if self.width == self.height:
+            return f'Куб размером {self.width}х{self.height}'
+        return f'Прямоугольник размером {self.width}х{self.height}'
+
+    def __bool__(self):
+        return self.width == self.height
 
 
-
+q1 = Quadrilateral(10)
+print(q1)  # печатает "Куб размером 10х10"
+print(bool(q1))  # печатает "True"
+q2 = Quadrilateral(3, 5)
+print(q2)  # печатает "Прямоугольник размером 3х5"
+print(q2 == True)  # печатает "False"
 
 
 
