@@ -958,44 +958,75 @@
 # print(q1<=q2)
 # print(q1<15)
 
-class ChessPlayer:
+# class ChessPlayer:
+#
+#     def __init__(self, name, surname, rating):
+#         self.name = name
+#         self.surname = surname
+#         self.rating = rating
+#
+#     def __eq__(self, other):
+#         if isinstance(other, ChessPlayer):
+#             return self.rating == other.rating
+#         if isinstance(other, int):
+#             return self.rating == other
+#         return f'Невозможно выполнить сравнение'
+#
+#     def __gt__(self, other):
+#         if isinstance(other, ChessPlayer):
+#             return self.rating > other.rating
+#         if isinstance(other, int):
+#             return self.rating > other
+#         return f'Невозможно выполнить сравнение'
+#
+#     def __lt__(self, other):
+#         if isinstance(other, ChessPlayer):
+#             return self.rating < other.rating
+#         if isinstance(other, int):
+#             return self.rating < other
+#         return f'Невозможно выполнить сравнение'
+#
+#
+#
+# magnus = ChessPlayer('Carlsen', 'Magnus', 2847)
+# ian = ChessPlayer('Ian', 'Nepomniachtchi', 2789)
+# print(magnus == 4000) # False
+# print(ian == 2789) # True
+# print(magnus == ian) # False
+# print(magnus > ian) # True
+# print(magnus < ian) # False
+# print(magnus < [1, 2]) # печатает "Невозможно выполнить сравнениe"
 
-    def __init__(self, name, surname, rating):
-        self.name = name
-        self.surname = surname
-        self.rating = rating
+#method eq and hash++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+class Point:
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
     def __eq__(self, other):
-        if isinstance(other, ChessPlayer):
-            return self.rating == other.rating
-        if isinstance(other, int):
-            return self.rating == other
-        return f'Невозможно выполнить сравнение'
+        return isinstance(other, Point) and \
+               self.x == other.x and self.y == other.y
 
-    def __gt__(self, other):
-        if isinstance(other, ChessPlayer):
-            return self.rating > other.rating
-        if isinstance(other, int):
-            return self.rating > other
-        return f'Невозможно выполнить сравнение'
+    def __hash__(self):
+        return hash(id(self)) #hash((self.x, self.y))
 
-    def __lt__(self, other):
-        if isinstance(other, ChessPlayer):
-            return self.rating < other.rating
-        if isinstance(other, int):
-            return self.rating < other
-        return f'Невозможно выполнить сравнение'
+    def __repr__(self):
+        return f'{self.x}, {self.y}'
 
+d = {}
+p1 = Point(1, 2)
+p2 = Point(1, 2)
+print(p1==p2)
+print(hash(p1))
+print(hash(p2))
+d[p1] = 100
+d[p2] = 200
+print(d) #{1, 2: 100, 1, 2: 200}
 
 
-magnus = ChessPlayer('Carlsen', 'Magnus', 2847)
-ian = ChessPlayer('Ian', 'Nepomniachtchi', 2789)
-print(magnus == 4000) # False
-print(ian == 2789) # True
-print(magnus == ian) # False
-print(magnus > ian) # True
-print(magnus < ian) # False
-print(magnus < [1, 2]) # печатает "Невозможно выполнить сравнениe"
+
 
 
 
