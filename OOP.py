@@ -1124,35 +1124,134 @@
 
 #__call__+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-from time import perf_counter
+# from time import perf_counter
+#
+# class Timer:
+#
+#     def __init__(self, func):
+#         self.fn = func
+#
+#     def __call__(self, *args, **kwargs):
+#         start = perf_counter()
+#         print('start timer')
+#         work_func = self.fn(*args, **kwargs)
+#         finish_count_time = perf_counter()
+#         print(f'work func time = {finish_count_time - start}')
+#         return work_func
+#
+# # @Timer
+# # def per(n):
+# #     pr = 1
+# #     for i in range(1, n + 1):
+# #         pr *= i
+# #     return pr
+#
+# def fib(n):
+#     if n <= 2:
+#         return 1
+#     return fib(n - 1) + fib(n - 2)
+#
+# print(Timer(fib)(40))
 
-class Timer:
+#Polimorfizm***************************************************************************************
 
-    def __init__(self, func):
-        self.fn = func
+# class Rectangle:
+#
+#     def __init__(self, a, b):
+#         self.a = a
+#         self.b = b
+#
+#     def __repr__(self):
+#         return f'{self.a}, {self.b}'
+#
+#     def get_rect_area(self):
+#         return self.a * self.b
+#
+# class Square:
+#
+#     def __init__(self, a):
+#         self.a = a
+#
+#     def __repr__(self):
+#         return f'{self.a}'
+#
+#     def get_sq_area(self):
+#         return self.a ** 2
+#
+# class Circle:
+#
+#     def __init__(self, r):
+#         self.r = r
+#
+#     def __repr__(self):
+#         return f'{self.r}'
+#
+#     def get_cir_area(self):
+#         return 3.14 * self.r ** 2
+#
+#
+# rec1 = Rectangle(2, 6)
+# rec2 = Rectangle(4, 5)
+# cir1 = Circle(2)
+# cir2 = Circle(4)
+# sq1 = Square(3)
+# sq2 = Square(7)
+#
+# figures = (rec1, rec2, sq1, sq2, cir1, cir2)
+# print(figures)
+# for figure in figures:
+#     if isinstance(figure, Rectangle):
+#         print(figure.get_rect_area())
+#     elif isinstance(figure, Square):
+#         print(figure.get_sq_area())
+#     else:
+#         print(figure.get_cir_area())
 
-    def __call__(self, *args, **kwargs):
-        start = perf_counter()
-        print('start timer')
-        work_func = self.fn(*args, **kwargs)
-        finish_count_time = perf_counter()
-        print(f'work func time = {finish_count_time - start}')
-        return work_func
+#Polimorfizm if all merhod named identi
 
-# @Timer
-# def per(n):
-#     pr = 1
-#     for i in range(1, n + 1):
-#         pr *= i
-#     return pr
+class Rectangle:
 
-def fib(n):
-    if n <= 2:
-        return 1
-    return fib(n - 1) + fib(n - 2)
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
 
-print(Timer(fib)(40))
+    def __str__(self):
+        return f'side rectangle = {self.a}x{self.b}'
+
+    def get_area(self):
+        return self.a * self.b
+
+class Square:
+
+    def __init__(self, a):
+        self.a = a
+
+    def __str__(self):
+        return f'side = {self.a}'
+
+    def get_area(self):
+        return self.a ** 2
+
+class Circle:
+
+    def __init__(self, r):
+        self.r = r
+
+    def __str__(self):
+        return f'radius circle = {self.r}'
+
+    def get_area(self):
+        return 3.14 * self.r ** 2
 
 
+rec1 = Rectangle(2, 6)
+rec2 = Rectangle(4, 5)
+cir1 = Circle(2)
+cir2 = Circle(4)
+sq1 = Square(3)
+sq2 = Square(7)
 
-
+figures = (rec1, rec2, sq1, sq2, cir1, cir2)
+print(figures)
+for figure in figures:
+    print(figure, figure.get_area())
