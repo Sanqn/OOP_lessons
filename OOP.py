@@ -1209,49 +1209,120 @@
 
 #Polimorfizm if all merhod named identi
 
-class Rectangle:
+# class Rectangle:
+#
+#     def __init__(self, a, b):
+#         self.a = a
+#         self.b = b
+#
+#     def __str__(self):
+#         return f'side rectangle = {self.a}x{self.b}'
+#
+#     def get_area(self):
+#         return self.a * self.b
+#
+# class Square:
+#
+#     def __init__(self, a):
+#         self.a = a
+#
+#     def __str__(self):
+#         return f'side = {self.a}'
+#
+#     def get_area(self):
+#         return self.a ** 2
+#
+# class Circle:
+#
+#     def __init__(self, r):
+#         self.r = r
+#
+#     def __str__(self):
+#         return f'radius circle = {self.r}'
+#
+#     def get_area(self):
+#         return 3.14 * self.r ** 2
+#
+#
+# rec1 = Rectangle(2, 6)
+# rec2 = Rectangle(4, 5)
+# cir1 = Circle(2)
+# cir2 = Circle(4)
+# sq1 = Square(3)
+# sq2 = Square(7)
+#
+# figures = (rec1, rec2, sq1, sq2, cir1, cir2)
+# print(figures)
+# for figure in figures:
+#     print(figure, figure.get_area())
 
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+#Method __getitem__, __setitem__, __delitem__+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    def __str__(self):
-        return f'side rectangle = {self.a}x{self.b}'
+# class Vector:
+#
+#     def __init__(self, *args):
+#         self.values = list(args)
+#
+#     def __repr__(self):
+#         return str(self.values)
+#
+#     def __getitem__(self, item):
+#         if 0 <= item < len(self.values):
+#             return self.values[item]
+#         else:
+#             raise IndexError('index out of range')
+#
+#     def __setitem__(self, key, value):
+#         if 0 <= key < len(self.values):
+#             self.values[key] = value
+#         elif key > len(self.values):
+#             deff = key - len(self.values)#  разряженный список до значения введенного индекса
+#             self.values.extend([0]*(deff+1))
+#             self.values[key] = value
+#         else:
+#             raise IndexError('index out of range')
+#
+#     def __delitem__(self, key):
+#         if 0 <= key < len(self.values):
+#            del self.values[key]
+#         else:
+#             raise IndexError('index out of range')
+#
+# v1 = Vector(1, 2, 8, 5, 4)
+# print(v1)
+# print(v1.values)
+# v2 = Vector(10, 7, 4, 5, 3)
+# print(v2.values[1]) # 7
+# print(v2[1]) #TypeError: 'Vector' object is not subscriptable without __getitem__
+# print(v2[1]) #with __getitem__ = 7
+# v2[1] = 150
+# print(v2) #[10, 150, 4, 5, 3]
+# del v2[1]
+# print(v2) #[10, 4, 5, 3]
+# v2[10] = 16
+# print(v2)
 
-    def get_area(self):
-        return self.a * self.b
+class Vector:
 
-class Square:
+    def __init__(self, **kwargs):
+        self.values = dict(kwargs)
 
-    def __init__(self, a):
-        self.a = a
+    def __repr__(self):
+        return str(self.values)
 
-    def __str__(self):
-        return f'side = {self.a}'
+    def __getitem__(self, item):
+        return self.values[item]
 
-    def get_area(self):
-        return self.a ** 2
-
-class Circle:
-
-    def __init__(self, r):
-        self.r = r
-
-    def __str__(self):
-        return f'radius circle = {self.r}'
-
-    def get_area(self):
-        return 3.14 * self.r ** 2
+    def __setitem__(self, key, value):
+        self.values[key] = value
 
 
-rec1 = Rectangle(2, 6)
-rec2 = Rectangle(4, 5)
-cir1 = Circle(2)
-cir2 = Circle(4)
-sq1 = Square(3)
-sq2 = Square(7)
+    def __delitem__(self, key):
+       del self.values[key]
 
-figures = (rec1, rec2, sq1, sq2, cir1, cir2)
-print(figures)
-for figure in figures:
-    print(figure, figure.get_area())
+v1 = Vector(a=1, b=2, c=3)
+print(v1)
+print(v1.values)
+print(v1['b'])
+v1[2] = 5
+print(v1)
