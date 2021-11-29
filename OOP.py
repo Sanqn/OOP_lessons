@@ -1068,33 +1068,90 @@
 # print(p2)  # печатает "San Francisco"
 # print(p1 == True)  # печатает "False"
 
-class Quadrilateral:
+# class Quadrilateral:
+#
+#     def __init__(self, *args):
+#         if len(args) == 1:
+#             self.width = args[0]
+#             self.height = args[0]
+#         else:
+#             self.width, self.height = args
+#
+#     def __str__(self):
+#         if self.width == self.height:
+#             return f'Куб размером {self.width}х{self.height}'
+#         return f'Прямоугольник размером {self.width}х{self.height}'
+#
+#     def __bool__(self):
+#         return self.width == self.height
+#
+#
+# q1 = Quadrilateral(10)
+# print(q1)  # печатает "Куб размером 10х10"
+# print(bool(q1))  # печатает "True"
+# q2 = Quadrilateral(3, 5)
+# print(q2)  # печатает "Прямоугольник размером 3х5"
+# print(q2 == True)  # печатает "False"
 
-    def __init__(self, *args):
-        if len(args) == 1:
-            self.width = args[0]
-            self.height = args[0]
-        else:
-            self.width, self.height = args
 
-    def __str__(self):
-        if self.width == self.height:
-            return f'Куб размером {self.width}х{self.height}'
-        return f'Прямоугольник размером {self.width}х{self.height}'
+# class Counter:
+#
+#     def __init__(self):
+#         self.counter = 0
+#         self.summ = 0
+#         self.lenths = 0
+#         print('init object', self)
+#
+#     def __call__(self, *args, **kwargs):
+#         self.counter += 1
+#         self.summ += sum(args)
+#         self.lenths += len(args)
+#         return f'our instance was called {self.counter} times'
+#
+#     def average(self):
+#         return int(self.summ/self.lenths)
+#
+# v = Counter()
+# print(v.summ)
+# print(v.lenths)
+# print(v.counter)
+# print(v(1, 5, 8))
+# print(v.summ)
+# v(3, 18)
+# print(v.summ)
+# print(v.lenths)
+# print(v.average())
 
-    def __bool__(self):
-        return self.width == self.height
+#__call__+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+from time import perf_counter
 
-q1 = Quadrilateral(10)
-print(q1)  # печатает "Куб размером 10х10"
-print(bool(q1))  # печатает "True"
-q2 = Quadrilateral(3, 5)
-print(q2)  # печатает "Прямоугольник размером 3х5"
-print(q2 == True)  # печатает "False"
+class Timer:
 
+    def __init__(self, func):
+        self.fn = func
 
+    def __call__(self, *args, **kwargs):
+        start = perf_counter()
+        print('start timer')
+        work_func = self.fn(*args, **kwargs)
+        finish_count_time = perf_counter()
+        print(f'work func time = {finish_count_time - start}')
+        return work_func
 
+# @Timer
+# def per(n):
+#     pr = 1
+#     for i in range(1, n + 1):
+#         pr *= i
+#     return pr
+
+def fib(n):
+    if n <= 2:
+        return 1
+    return fib(n - 1) + fib(n - 2)
+
+print(Timer(fib)(40))
 
 
 
