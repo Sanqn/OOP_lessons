@@ -1302,27 +1302,71 @@
 # v2[10] = 16
 # print(v2)
 
-class Vector:
+# class Vector:
+#
+#     def __init__(self, **kwargs):
+#         self.values = dict(kwargs)
+#
+#     def __repr__(self):
+#         return str(self.values)
+#
+#     def __getitem__(self, item):
+#         return self.values[item]
+#
+#     def __setitem__(self, key, value):
+#         self.values[key] = value
+#
+#
+#     def __delitem__(self, key):
+#        del self.values[key]
+#
+# v1 = Vector(a=1, b=2, c=3)
+# print(v1)
+# print(v1.values)
+# print(v1['b'])
+# v1[2] = 5
+# print(v1)
 
-    def __init__(self, **kwargs):
-        self.values = dict(kwargs)
+#Method __iter__ and __next__+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    def __repr__(self):
-        return str(self.values)
+class Mark:
 
-    def __getitem__(self, item):
-        return self.values[item]
+    def __init__(self, value):
+        self.value = value
+        self.index = 0
 
-    def __setitem__(self, key, value):
-        self.values[key] = value
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.index >= len(self.value):
+            raise StopIteration
+        else:
+            letter = self.value[self.index]
+            self.index += 1
+            return letter
 
 
-    def __delitem__(self, key):
-       del self.values[key]
+class Student:
 
-v1 = Vector(a=1, b=2, c=3)
-print(v1)
-print(v1.values)
-print(v1['b'])
-v1[2] = 5
-print(v1)
+    def __init__(self, name, surname, marks):
+        self.name = name
+        self.surname = surname
+        self.marks = marks
+
+    def __iter__(self):
+        self.index = 0
+        return iter(self.marks)
+
+    def __next__(self):
+        if self.index >= len(self.marks):
+            raise StopIteration
+        else:
+            letter = self.marks[self.index]
+            self.index += 1
+            return letter
+
+m = Mark([8, 7, 9, 10, 6, 7])
+nick = Student('Nick', 'Mitchel', m)
+for i in nick:
+    print(i)
