@@ -1329,44 +1329,133 @@
 
 #Method __iter__ and __next__+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-class Mark:
+# class Mark:
+#
+#     def __init__(self, value):
+#         self.value = value
+#         self.index = 0
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         if self.index >= len(self.value):
+#             raise StopIteration
+#         else:
+#             letter = self.value[self.index]
+#             self.index += 1
+#             return letter
+#
+#
+# class Student:
+#
+#     def __init__(self, name, surname, marks):
+#         self.name = name
+#         self.surname = surname
+#         self.marks = marks
+#
+#     def __iter__(self):
+#         self.index = 0
+#         return iter(self.marks)
+#
+#     def __next__(self):
+#         if self.index >= len(self.marks):
+#             raise StopIteration
+#         else:
+#             letter = self.marks[self.index]
+#             self.index += 1
+#             return letter
+#
+# m = Mark([8, 7, 9, 10, 6, 7])
+# nick = Student('Nick', 'Mitchel', m)
+# for i in nick:
+#     print(i)
 
-    def __init__(self, value):
-        self.value = value
-        self.index = 0
 
-    def __iter__(self):
-        return self
+# class MyNumIter:
+#
+#     def __init__(self):
+#         self.nums = '0123456789'
+#         self.counter = 0
+#
+#     def __iter__(self):
+#         return self
+#
+#     def __next__(self):
+#         if self.counter >= len(self.nums):
+#             raise StopIteration
+#         else:
+#             mark = self.nums[self.counter - 1]
+#             self.counter += 1
+#             if self.counter % 2 == 0:
+#                 return mark
+#
+#
+# c = MyNumIter()
+# print(iter(c))  # <__main__.MyNumIter object at 0x0000023ADE809608>
 
-    def __next__(self):
-        if self.index >= len(self.value):
-            raise StopIteration
-        else:
-            letter = self.value[self.index]
-            self.index += 1
-            return letter
+# for i in c:
+#     print(i, end=' ')
+
+# c = 'jfsl ksKjll ekljs'
+# print(' '.join([i[0].upper() + i[1:].lower() for i in c.split()]))
+# print(c.title())
 
 
-class Student:
+# perimeter_sequence = lambda a, n: a*n*4
+#
+# print(perimeter_sequence(1, 3))
 
-    def __init__(self, name, surname, marks):
-        self.name = name
-        self.surname = surname
-        self.marks = marks
+# def cost(mins):
+#     sum = 30
+#     if mins <= 65:
+#         return 30
+#     elif mins > 65:
+#         sum += 10
+#         a = mins - 60
+#         for i in range(30, a + 1, 30):
+#             sum += 10
+#         if (mins - 60) % 30 <= 5:
+#             sum -= 10
+#     return sum
+#
+# print(cost(346))
 
-    def __iter__(self):
-        self.index = 0
-        return iter(self.marks)
+#principle inheritance++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    def __next__(self):
-        if self.index >= len(self.marks):
-            raise StopIteration
-        else:
-            letter = self.marks[self.index]
-            self.index += 1
-            return letter
+class Person: # Parent
 
-m = Mark([8, 7, 9, 10, 6, 7])
-nick = Student('Nick', 'Mitchel', m)
-for i in nick:
-    print(i)
+    def can_walk(self):
+        print('I can walk')
+
+    def can_jump(self):
+        print('I can jump')
+
+
+class Doctor(Person):#subclass
+
+    def can_cure(self):
+        print('I can treat')
+
+class Housewife(Doctor):
+    pass
+
+class Architect(Person):#subclass
+
+    def can_build(self):
+        print('I can build')
+
+
+
+d = Architect()
+d.can_walk()
+d.can_build()
+a = Doctor()
+a.can_walk()
+a.can_cure()
+b = Housewife
+b.can_cure()#can_walk() can_jump()
+print(issubclass(Doctor, Person))#True
+print(isinstance(d, Architect))#True
+print(isinstance(d, Person))#True
+
