@@ -919,8 +919,7 @@
 # print(v4)  # печатает "Вектор(9, 11, 13)"
 
 
-
-#Magic method++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Magic method++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # __eq__ ==  '=='
 # __ne__ ==  '!='
 # __lt__ ==  '<'
@@ -997,7 +996,7 @@
 # print(magnus < ian) # False
 # print(magnus < [1, 2]) # печатает "Невозможно выполнить сравнениe"
 
-#method eq and hash++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# method eq and hash++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # class Point:
 #
@@ -1026,7 +1025,7 @@
 # print(d) #{1, 2: 100, 1, 2: 200}
 
 
-#__bool__+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# __bool__+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # class Point:
 #
@@ -1122,7 +1121,7 @@
 # print(v.lenths)
 # print(v.average())
 
-#__call__+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# __call__+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # from time import perf_counter
 #
@@ -1153,7 +1152,7 @@
 #
 # print(Timer(fib)(40))
 
-#Polimorfizm***************************************************************************************
+# Polimorfizm***************************************************************************************
 
 # class Rectangle:
 #
@@ -1207,7 +1206,7 @@
 #     else:
 #         print(figure.get_cir_area())
 
-#Polimorfizm if all merhod named identi
+# Polimorfizm if all merhod named identi
 
 # class Rectangle:
 #
@@ -1256,7 +1255,7 @@
 # for figure in figures:
 #     print(figure, figure.get_area())
 
-#Method __getitem__, __setitem__, __delitem__+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Method __getitem__, __setitem__, __delitem__+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # class Vector:
 #
@@ -1327,7 +1326,7 @@
 # v1[2] = 5
 # print(v1)
 
-#Method __iter__ and __next__+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Method __iter__ and __next__+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # class Mark:
 #
@@ -1421,41 +1420,262 @@
 #
 # print(cost(346))
 
-#principle inheritance++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# principle inheritance++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-class Person: # Parent
+# class Person: # Parent
+#
+#     def can_walk(self):
+#         print('I can walk')
+#
+#     def can_jump(self):
+#         print('I can jump')
+#
+#
+# class Doctor(Person):#subclass
+#
+#     def can_cure(self):
+#         print('I can treat')
+#
+# class Housewife(Doctor):
+#     pass
+#
+# class Architect(Person):#subclass
+#
+#     def can_build(self):
+#         print('I can build')
+#
+#
+#
+# d = Architect()
+# d.can_walk()
+# d.can_build()
+# a = Doctor()
+# a.can_walk()
+# a.can_cure()
+# b = Housewife
+# b.can_cure()#can_walk() can_jump()
+# print(issubclass(Doctor, Person))#True
+# print(isinstance(d, Architect))#True
+# print(isinstance(d, Person))#True
 
-    def can_walk(self):
-        print('I can walk')
+# class Person: # Parent
+#     pass
+#
+# class MyDict(dict):
+#     pass
+#
+# class Doctor(Person):#subclass
+#     pass
+#
+# class Architect(Person):#subclass
+#     pass
+# a = MyDict()
+# print(a)#{}
 
-    def can_jump(self):
-        print('I can jump')
+# class NewInt(int):
+#
+#     def __init__(self, value):
+#         self.value = value
+#
+#     def repeat(self, n=2):
+#         self.n = n
+#         return int(self.n * str(self.value))
+#
+#     def to_bin(self):
+#         return f'{int(bin(self.value)[2:])} - двоичное представление числа {self}'
+#
+# # or
+# # class NewInt(int): #
+# #
+# #     def repeat(self, n=2):
+# #         return int(str(self) * n)
+# #
+# #     def to_bin(self):
+# #         return int(bin(self)[2:])
+
+# a = NewInt(16)
+# print(a.repeat())  # печатает число 99
+# d = NewInt(a + 5)
+# print(d.repeat(3)) # печатает число 141414
+# b = NewInt(NewInt(7) * NewInt(5))
+# print(b)
+# print(a.to_bin()) # печатает 100011 - двоичное представление числа 35
+
+# method overriding++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# class Person:  # Parent
+#
+#     def __init__(self, name):
+#         self.name = name
+#
+#     def can_walk(self):
+#         print('Person can walk')
+#
+#     def can_jump(self):
+#         print('Person can jump')
+#
+#     def combo(self):
+#         self.can_walk()
+#         self.can_jump()
+#
+#     def __str__(self):
+#         return f'Person {self.name}'
+#
+# class Doctor(Person):  # subclass
+#
+#     def can_jump(self):
+#         print('Doctor can jump and swim')
+#
+#     def __str__(self):
+#         return f'Doctor {self.name}'
+#
+#
+# d = Person('Alex')
+# a = Doctor('Robinson')
+# print(d)
+# print(a)
+# a.combo()
+
+# Extending+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# class Person:
+#
+#     age = 25
+#     def sleep(self):
+#         print('Person can sleep')
+#
+#     def combo(self):
+#         if hasattr(self, 'can_walk'):
+#             self.can_walk()
+#         if hasattr(self, 'can_jump'):
+#             self.can_jump()
+#         self.sleep()
+#         print(self.age)
+#
+# class Doctor(Person):
+#
+#     age = 30
+#     def can_walk(self):
+#         print('Doctor can walk')
+#
+#     def can_jump(self):
+#         print('Doctor can jump')
+#
+#     def sleep(self):
+#         print('Doctor can sleep')
+#
+# p = Person()
+# d = Doctor()
+# p.combo()
+# print('--'*10)
+# d.combo()
+
+# Delegating+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-class Doctor(Person):#subclass
+# class Person:
+#
+#     def __init__(self, name, surname):
+#         self.name = name
+#         self.surname = surname
+#
+#     def __str__(self):
+#         return f'Person {self.name}, {self.surname}'
+#
+#     def sleep(self):
+#         print('Person can sleep')
+#
+#     def info(self):
+#         print('Paren class')
+#         print(self)
+#
+# class Doctor(Person):
+#
+#     def __init__(self, name, surname, age):
+#         super(Doctor, self).__init__(name, surname)
+#         self.age = age
+#
+#     def __str__(self):
+#         return f'Doctor {self.name}, {self.surname}, {self.age}'
+#
+#     def sleep(self):
+#         super(Doctor, self).sleep()
+#         print('Doctor can sleep')
+#         super(Doctor, self).sleep()
+#
+# p = Person('Vitold', 'Boshak')
+# d = Doctor('Nick', 'Korik', 87)
+# print(p.name, p.surname)
+# print(d.name, d.surname, d.age)
+# print(p)
+# print(d)
+# print('**'*10)
+# d.info()
 
-    def can_cure(self):
-        print('I can treat')
+class Transport:
 
-class Housewife(Doctor):
-    pass
+    def __init__(self, brand, max_speed, kind=None):
+        self.brand = brand
+        self.max_speed = max_speed
+        self.kind = kind
 
-class Architect(Person):#subclass
+    def __str__(self):
+        return f'Тип транспорта {self.kind} марки {self.brand} может развить скорость {self.max_speed} км/ч'
 
-    def can_build(self):
-        print('I can build')
+class Car(Transport):
+    def __init__(self, brand, max_speed, mileage, gasoline_residue):
+        super(Car, self).__init__(brand, max_speed)
+        self.kind = 'Car'
+        self.mileage = mileage
+        self.__gasoline_residue = gasoline_residue
 
+    def __str__(self):
+        return f'Тип транспорта {self.kind} марки {self.brand} может развить скорость {self.max_speed} км/ч'
 
+    @property
+    def gasoline(self):
+        return f'Осталось бензина на {self.__gasoline_residue} км'
 
-d = Architect()
-d.can_walk()
-d.can_build()
-a = Doctor()
-a.can_walk()
-a.can_cure()
-b = Housewife
-b.can_cure()#can_walk() can_jump()
-print(issubclass(Doctor, Person))#True
-print(isinstance(d, Architect))#True
-print(isinstance(d, Person))#True
+    @gasoline.setter
+    def gasoline(self, value):
+        if isinstance(value, int):
+            self.__gasoline_residue += value
+            print(f'Объем топлива увеличен на {value} л и составляет {self.__gasoline_residue} л')
+        else:
+            print('Ошибка заправки автомобиля')
 
+class Boat(Transport):
+    
+    def __init__(self, brand, max_speed, owners_name):
+        super(Boat, self).__init__(brand, max_speed)
+        self.owners_name = owners_name
+        self.kind = 'Boat'
+
+    def __str__(self):
+        return f'Этой лодкой марки {self.brand} владеет {self.owners_name}'
+
+class Plane(Transport):
+    def __init__(self, brand, max_speed, capacity):
+        super(Plane, self).__init__(brand, max_speed)
+        self.capacity = capacity
+        self.kind = 'Plane'
+
+    def __str__(self):
+        return f'Самолет марки {self.brand} вмещает в себя {self.capacity} людей'
+
+transport = Transport('Telega', 10)
+print(transport)  # Тип транспорта None марки Telega может развить скорость 10 км/ч
+bike = Transport('shkolnik', 20, 'bike')
+print(bike)  # Тип транспорта bike марки shkolnik может развить скорость 20 км/ч
+
+first_plane = Plane('Virgin Atlantic', 700, 450)
+print(first_plane)  # Самолет марки Virgin Atlantic вмещает в себя 450 людей
+first_car = Car('BMW', 230, 75000, 300)
+print(first_car)  # Тип транспорта Car марки BMW может развить скорость 230 км/ч
+print(first_car.gasoline)  # Осталось бензина на 300 км
+first_car.gasoline = 20  # Печатает 'Объем топлива увеличен на 20 л и составляет 320 л'
+print(first_car.gasoline)  # Осталось бензина на 320 км
+second_car = Car('Audi', 230, 70000, 130)
+second_car.gasoline = [None]  # Печатает 'Ошибка заправки автомобиля'
+first_boat = Boat('Yamaha', 40, 'Petr')
+print(first_boat)  # Этой лодкой марки Yamaha владеет Petr
