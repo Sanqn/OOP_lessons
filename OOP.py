@@ -1751,58 +1751,99 @@
 # print(100000 < s_first)  # False
 # print(100 < s_first)  # True
 
+#Multi_Delegating+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-class Doctor:
+# class Doctor:
+#
+#     def __init__(self, rank):
+#         self.rank = rank
+#
+#     def graduate(self):
+#         print('Eeeepp i am a doctor')
+#
+#     def can_cure(self):
+#         print('I am doctor, i can cure ')
+#
+#     def can_build(self):
+#         print('I am doctor i can build too')
+#
+# class Builder:
+#
+#     def __init__(self, degree):
+#         self.degree = degree
+#
+#     def graduate(self):
+#         print('Eeeepp i am a builder')
+#
+#     def can_build(self):
+#         print('I am builder i can build')
+#
+# class Person(Doctor, Builder):
+#
+#     def __init__(self, rank, degree):
+#         super(Person, self).__init__(rank)
+#         Builder.__init__(self, degree)
+#
+#     def __str__(self):
+#         return f'Person {self.rank}, {self.degree}'
+#
+#     def graduate(self):
+#         print('Look who i am')
+#         super(Person, self).graduate()
+#         Builder.graduate(self)
+#
+# p = Person('Lord', 5)
+# p.can_cure()
+# p.can_build() # class Person(Doctor, Builder) first find in Doctor I am doctor i can build too
+# p.can_build() # class Person(Builder, Doctor) first find in Builder I am builder i can build
+# print(Person.__mro__) # (<class '__main__.Person'>, <class '__main__.Doctor'>, <class '__main__.Builder'>, <class 'object'>)
+# p.graduate()
+# print(p) #Person Lord, 5
 
-    def __init__(self, rank):
-        self.rank = rank
+#Slots++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    def graduate(self):
-        print('Eeeepp i am a doctor')
+from timeit import timeit
 
-    def can_cure(self):
-        print('I am doctor, i can cure ')
+class Point:
 
-    def can_build(self):
-        print('I am doctor i can build too')
+    def __init__(self, x, y): #method __init__
+        self.x = x # instance class self.x, attribute x
+        self.y = y
 
-class Builder:
+class PointSlots:
 
-    def __init__(self, degree):
-        self.degree = degree
+    __slots__ = ('x', 'y') # input only x, y
 
-    def graduate(self):
-        print('Eeeepp i am a builder')
-
-    def can_build(self):
-        print('I am builder i can build')
-
-class Person(Doctor, Builder):
-
-    def __init__(self, rank, degree):
-        super(Person, self).__init__(rank)
-        Builder.__init__(self, degree)
+    def __init__(self, x, y): #method __init__
+        self.x = x # instance class self.x, attribute x
+        self.y = y
 
     def __str__(self):
-        return f'Person {self.rank}, {self.degree}'
-
-    def graduate(self):
-        print('Look who i am')
-        super(Person, self).graduate()
-        Builder.graduate(self)
-
-p = Person('Lord', 5)
-p.can_cure()
-p.can_build() # class Person(Doctor, Builder) first find in Doctor I am doctor i can build too
-p.can_build() # class Person(Builder, Doctor) first find in Builder I am builder i can build
-print(Person.__mro__) # (<class '__main__.Person'>, <class '__main__.Doctor'>, <class '__main__.Builder'>, <class 'object'>)
-p.graduate()
-print(p) #Person Lord, 5
+        return f'PointSlots position {self.x}, {self.y}'
 
 
+def make_time1():
+    s = Point(4, 5)
+    s.x = 100
+    s.x
+    del s.x
 
+def make_time2():
+    s = PointSlots(4, 5)
+    s.x = 100
+    s.x
+    del s.x
 
+print(timeit(make_time1)) #0.799924
+print(timeit(make_time2)) #0.5114496
 
+# d = PointSlots(4, 5)
+# d.x = 500
+# #d.q = 200 # AttributeError: 'PointSlots' object has no attribute 'q'
+# print(d)
+# a = Point(4, 5)
+# a.q = 500
+# print(a.__dict__)
 
 
 
