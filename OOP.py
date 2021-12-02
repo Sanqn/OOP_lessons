@@ -1680,76 +1680,130 @@
 # first_boat = Boat('Yamaha', 40, 'Petr')
 # print(first_boat)  # Этой лодкой марки Yamaha владеет Petr
 
-class Initialization:
+# class Initialization:
+#
+#     def __init__(self, capacity, food):
+#         if not isinstance(capacity, int):
+#             print('Количество людей должно быть целым числом')
+#         else:
+#             self.capacity = capacity
+#             self.food = food
+#
+#     def __str__(self):
+#         return f'{self.capacity} людей предпочитают не есть мясо! Они предпочитают {self.food}'
+#
+# class Vegetarian(Initialization):
+#
+#     def __init__(self, capacity, food):
+#         super(Vegetarian, self).__init__(capacity, food)
+#
+#     def __str__(self):
+#         return f'{self.capacity} людей предпочитают не есть мясо! Они предпочитают {self.food}'
+#
+# class MeatEater(Initialization):
+#
+#     def __init__(self, capacity, food):
+#         super(MeatEater, self).__init__(capacity, food)
+#
+#     def __str__(self):
+#         return f'{self.capacity} мясоедов в Москве! Помимо мяса они едят еще и {self.food}'
+#
+# class SweetTooth(Initialization):
+#
+#     def __init__(self, capacity, food):
+#         super(SweetTooth, self).__init__(capacity, food)
+#
+#     def __str__(self):
+#         return f'Сладкоежек в Москве {self.capacity}. Их самая любимая еда: {self.food}'
+#
+#     def __eq__(self, other):
+#         if isinstance(other, int):
+#             return other == self.capacity
+#         if isinstance(other, Initialization):
+#             return other.capacity == self.capacity
+#         return f'Невозможно сравнить количество сладкоежек с {other}'
+#
+#     def __lt__(self, other):
+#         if isinstance(other, int):
+#             return other > self.capacity
+#         if isinstance(other, Initialization):
+#             return other.capacity > self.capacity
+#         return f'Невозможно сравнить количество сладкоежек с {other}'
+#
+#     def __gt__(self, other):
+#         if isinstance(other, int):
+#             return other < self.capacity
+#         if isinstance(other, Initialization):
+#             return other.capacity < self.capacity
+#         return f'Невозможно сравнить количество сладкоежек с {other}'
+#
+#
+# v_first = Vegetarian(10000, ['Орехи', 'овощи', 'фрукты'])
+# print(v_first)  # 10000 людей предпочитают не есть мясо! Они предпочитают ['Орехи', 'овощи', 'фрукты']
+# v_second = Vegetarian([23], ['nothing'])  # Количество людей должно быть целым числом
+# m_first = MeatEater(15000, ['Жареную картошку', 'рыба'])
+# print(m_first)  # 15000 мясоедов в Москве! Помимо мяса они едят еще и ['Жареную картошку', 'рыба']
+# s_first = SweetTooth(30000, ['Мороженое', 'Чипсы', 'ШОКОЛАД'])
+# print(s_first)  # Сладкоежек в Москве 30000. Их самая любимая еда: ['Мороженое', 'Чипсы', 'ШОКОЛАД']
+# print(s_first > v_first)  # True
+# print(30000 == s_first)  # True
+# print(s_first == 25000)  # False
+# print(100000 < s_first)  # False
+# print(100 < s_first)  # True
 
-    def __init__(self, capacity, food):
-        if not isinstance(capacity, int):
-            print('Количество людей должно быть целым числом')
-        else:
-            self.capacity = capacity
-            self.food = food
+
+class Doctor:
+
+    def __init__(self, rank):
+        self.rank = rank
+
+    def graduate(self):
+        print('Eeeepp i am a doctor')
+
+    def can_cure(self):
+        print('I am doctor, i can cure ')
+
+    def can_build(self):
+        print('I am doctor i can build too')
+
+class Builder:
+
+    def __init__(self, degree):
+        self.degree = degree
+
+    def graduate(self):
+        print('Eeeepp i am a builder')
+
+    def can_build(self):
+        print('I am builder i can build')
+
+class Person(Doctor, Builder):
+
+    def __init__(self, rank, degree):
+        super(Person, self).__init__(rank)
+        Builder.__init__(self, degree)
 
     def __str__(self):
-        return f'{self.capacity} людей предпочитают не есть мясо! Они предпочитают {self.food}'
+        return f'Person {self.rank}, {self.degree}'
 
-class Vegetarian(Initialization):
+    def graduate(self):
+        print('Look who i am')
+        super(Person, self).graduate()
+        Builder.graduate(self)
 
-    def __init__(self, capacity, food):
-        super(Vegetarian, self).__init__(capacity, food)
-
-    def __str__(self):
-        return f'{self.capacity} людей предпочитают не есть мясо! Они предпочитают {self.food}'
-
-class MeatEater(Initialization):
-
-    def __init__(self, capacity, food):
-        super(MeatEater, self).__init__(capacity, food)
-
-    def __str__(self):
-        return f'{self.capacity} мясоедов в Москве! Помимо мяса они едят еще и {self.food}'
-
-class SweetTooth(Initialization):
-
-    def __init__(self, capacity, food):
-        super(SweetTooth, self).__init__(capacity, food)
-
-    def __str__(self):
-        return f'Сладкоежек в Москве {self.capacity}. Их самая любимая еда: {self.food}'
-
-    def __eq__(self, other):
-        if isinstance(other, int):
-            return other == self.capacity
-        if isinstance(other, Initialization):
-            return other.capacity == self.capacity
-        return f'Невозможно сравнить количество сладкоежек с {other}'
-
-    def __lt__(self, other):
-        if isinstance(other, int):
-            return other > self.capacity
-        if isinstance(other, Initialization):
-            return other.capacity > self.capacity
-        return f'Невозможно сравнить количество сладкоежек с {other}'
-
-    def __gt__(self, other):
-        if isinstance(other, int):
-            return other < self.capacity
-        if isinstance(other, Initialization):
-            return other.capacity < self.capacity
-        return f'Невозможно сравнить количество сладкоежек с {other}'
+p = Person('Lord', 5)
+p.can_cure()
+p.can_build() # class Person(Doctor, Builder) first find in Doctor I am doctor i can build too
+p.can_build() # class Person(Builder, Doctor) first find in Builder I am builder i can build
+print(Person.__mro__) # (<class '__main__.Person'>, <class '__main__.Doctor'>, <class '__main__.Builder'>, <class 'object'>)
+p.graduate()
+print(p) #Person Lord, 5
 
 
-v_first = Vegetarian(10000, ['Орехи', 'овощи', 'фрукты'])
-print(v_first)  # 10000 людей предпочитают не есть мясо! Они предпочитают ['Орехи', 'овощи', 'фрукты']
-v_second = Vegetarian([23], ['nothing'])  # Количество людей должно быть целым числом
-m_first = MeatEater(15000, ['Жареную картошку', 'рыба'])
-print(m_first)  # 15000 мясоедов в Москве! Помимо мяса они едят еще и ['Жареную картошку', 'рыба']
-s_first = SweetTooth(30000, ['Мороженое', 'Чипсы', 'ШОКОЛАД'])
-print(s_first)  # Сладкоежек в Москве 30000. Их самая любимая еда: ['Мороженое', 'Чипсы', 'ШОКОЛАД']
-print(s_first > v_first)  # True
-print(30000 == s_first)  # True
-print(s_first == 25000)  # False
-print(100000 < s_first)  # False
-print(100 < s_first)  # True
+
+
+
+
 
 
 
