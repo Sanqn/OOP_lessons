@@ -2172,3 +2172,96 @@
 # n = Student(name=input(), last_name=input(), birth_year=input())
 # 
 # print(n)
+
+# our class Ship
+# class Ship:
+#     def __init__(self, name, capacity):
+#         self.name = name
+#         self.capacity = capacity
+#         self.cargo = 0
+#
+#             # the old sail method that you need to rewrite
+#     def sail(self, arg):
+#         self.arg = arg
+#         print(f"The {self.name} has sailed for {self.arg}!")
+#
+# black_pearl = Ship("Black Pearl", 800)
+# black_pearl.sail(input())
+
+# class User:
+#     def __init__(self, username):
+#         self.username = username
+#         self.friends = 0
+#
+#     # fix this method
+#     def add_friends(self, n):
+#         self.friends += n
+#         print(f"{self.username} now has {self.friends} friends.")
+#
+# a = User('Alex')
+# a.add_friends(5)
+
+
+# class PiggyBank:
+#
+#         def __init__(self, dollars, cents):
+#             self.total_cents = dollars * 100 + cents
+#
+#         @property
+#         def dollars(self):
+#             return self.total_cents // 100
+#
+#         @property
+#         def cents(self):
+#             return self.total_cents % 100
+#
+#         def add_money(self, deposit_dollars, deposit_cents):
+#             self.total_cents += deposit_dollars * 100
+#             self.total_cents += deposit_cents
+#
+#         def __str__(self):
+#             return f'({self.dollars}, {self.cents})'
+
+# a = PiggyBank(1512, 55)
+# a.add_money(50,234)
+# print(a)
+
+class Pet:
+    kind = "mammal"
+    n_pets = 0
+    pet_names = []
+
+    def __init__(self, spec, name):
+        self.spec = spec
+        self.name = name
+        self.legs = 4
+
+    def __str__(self):
+        return f'{self.name} {self.spec}'
+
+    def add_p(self):
+        Pet.n_pets += 1
+
+    def addlist(self):
+        Pet.pet_names.append(self.name)
+
+tom = Pet("cat", "Tom")
+tom.add_p()
+avocado = Pet("dog", "Avocado")
+avocado.add_p()
+ben = Pet("goldfish", "Benjamin")
+ben.add_p()
+tom.addlist()
+avocado.addlist()
+ben.addlist()
+print(Pet.n_pets)
+print(Pet.pet_names)
+
+
+
+
+
+
+
+
+
