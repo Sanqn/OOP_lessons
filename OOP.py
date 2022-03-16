@@ -366,7 +366,7 @@
 #
 #     def set_balance(self, value):
 #         if not isinstance(value, (int, float)):
-#             raise ValueError('Balance muct be number')
+#             raise ValueError('Balance must be number')
 #         self.__balance = value
 #
 #     def del_balance(self):
@@ -721,10 +721,92 @@
 #             raise ValueError('пароль простой')
 #         self.__password = value
 #
-#
 # s1 = User('Nick', 'Chegg123')
 # # s1.password = 'ter457'
 # print(s1.password)
+#
+
+# import string
+#
+#
+# class Registration:
+#
+#     def __init__(self, login, password):
+#         self.login = login
+#         self.password = password
+#
+#     @property
+#     def login(self):
+#         return self.__login
+#
+#     @login.setter
+#     def login(self, value):
+#         if not '@' in value:
+#             raise ValueError("Login must include at least one ' @ '")
+#         if not '.' in value:
+#             raise ValueError("Login must include at least one ' . '")
+#         self.__login = value
+#
+#     @property
+#     def password(self):
+#         return self.__password
+#
+#     @staticmethod
+#     def is_include_digit(password):
+#         for i in '0123456789':
+#             if i in password:
+#                 return True
+#         return False
+#
+#     @staticmethod
+#     def is_include_all_register(password):
+#         count = 0
+#         for i in password:
+#             if i.isupper():
+#                 count += 1
+#         if count >= 2:
+#             return True
+#         return False
+#
+#     @staticmethod
+#     def is_include_only_latin(password):
+#         for i in string.ascii_letters:
+#             if i in password:
+#                 return True
+#         return False
+#
+#     @staticmethod
+#     def check_password_dictionary(password):
+#         easy_passwords = ['123456', 'password', '123456789', '12345', '12345678', 'qwerty', '1234567', '111111',
+#                           '1234567890', '123123', 'abc123', '1234', 'password1', 'iloveyou', '1q2w3e4r', '000000',
+#                           'qwerty123', 'zaq12wsx', 'dragon', 'sunshine', 'princess', 'letmei', '654321', 'monkey',
+#                           '27653', '1qaz2wsx', '123321', 'qwertyuiop', 'superman', 'asdfghjkl']
+#         for i in easy_passwords:
+#             if password != i:
+#                 return True
+#         return False
+#
+#     @password.setter
+#     def password(self, value):
+#         if not isinstance(value, str):
+#             raise TypeError("Пароль должен быть строкой")
+#         if len(value) < 5:
+#             raise ValueError('Пароль должен быть длиннее 4 и меньше 12 символов')
+#         if len(value) > 11:
+#             raise ValueError('Пароль должен быть длиннее 4 и меньше 12 символов')
+#         if not Registration.is_include_digit(value):
+#             raise ValueError('Пароль должен содержать хотя бы одну цифру')
+#         if not Registration.is_include_all_register(value):
+#             raise ValueError('Пароль должен содержать хотя бы 2 заглавные буквы')
+#         if not Registration.is_include_only_latin(value):
+#             raise ValueError('Пароль должен содержать только латинский алфавит')
+#         if not Registration.check_password_dictionary(value):
+#             raise ValueError('Ваш пароль содержится в списке самых легких')
+#         self.__password = value
+#
+# s = Registration("translate@gmail.com", "as1SNdf")
+# s.login = 'com'
+# print(s.login)
 
 # class Person:
 #
@@ -1802,40 +1884,40 @@
 
 #Slots++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-from timeit import timeit
-
-class Point:
-
-    def __init__(self, x, y): #method __init__
-        self.x = x # instance class self.x, attribute x
-        self.y = y
-
-class PointSlots:
-
-    __slots__ = ('x', 'y') # input only x, y
-
-    def __init__(self, x, y): #method __init__
-        self.x = x # instance class self.x, attribute x
-        self.y = y
-
-    def __str__(self):
-        return f'PointSlots position {self.x}, {self.y}'
-
-
-def make_time1():
-    s = Point(4, 5)
-    s.x = 100
-    s.x
-    del s.x
-
-def make_time2():
-    s = PointSlots(4, 5)
-    s.x = 100
-    s.x
-    del s.x
-
-print(timeit(make_time1)) #0.799924
-print(timeit(make_time2)) #0.5114496
+# from timeit import timeit
+#
+# class Point:
+#
+#     def __init__(self, x, y): #method __init__
+#         self.x = x # instance class self.x, attribute x
+#         self.y = y
+#
+# class PointSlots:
+#
+#     __slots__ = ('x', 'y') # input only x, y
+#
+#     def __init__(self, x, y): #method __init__
+#         self.x = x # instance class self.x, attribute x
+#         self.y = y
+#
+#     def __str__(self):
+#         return f'PointSlots position {self.x}, {self.y}'
+#
+#
+# def make_time1():
+#     s = Point(4, 5)
+#     s.x = 100
+#     s.x
+#     del s.x
+#
+# def make_time2():
+#     s = PointSlots(4, 5)
+#     s.x = 100
+#     s.x
+#     del s.x
+#
+# print(timeit(make_time1)) #0.799924
+# print(timeit(make_time2)) #0.5114496
 
 # d = PointSlots(4, 5)
 # d.x = 500
@@ -1845,6 +1927,248 @@ print(timeit(make_time2)) #0.5114496
 # a.q = 500
 # print(a.__dict__)
 
+# Slots property++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# class Rectangle:
+#
+#     __slots__ = ('__width', '__height', '__perim')
+#
+#     def __init__(self, a, b):
+#         self.__width = a
+#         self.__height = b
+#         self.__perim = None
+#
+#     @property
+#     def perim(self):
+#         if self.__perim is None:
+#             self.__perim = self.__width + self.__height * 2
+#         return self.__perim
+#
+#     @perim.setter
+#     def perim(self, value):
+#         self.__width, self.__height = value
+#         self.__perim = None
+#
+#     @property
+#     def area(self):
+#         return self.__width * self.__height
+#
+#
+# class Square(Rectangle):
+#     __slots__ = 'color'
+#
+#     def __init__(self, a, b, color):
+#         super(Square, self).__init__(a, b)
+#         self.color = color
+#
+#
+# c = Rectangle(4, 5)
+# print(c.perim)
+# c.perim = 2, 3
+# print(c.perim)
+#
+# d = Square(2, 2, 'Red')
+# print(d.area, d.color)
+
+#Exceptions++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# print('hello')
+# print('hello1')
+# print('hello2')
+# try:
+#     int('hello')
+# except ValueError:
+#     print('Неправильное преобразование')
+# print('hello3')
+
+# class Wallet:
+#
+#     def __init__(self, currency, balance):
+#         self.balance = balance
+#         if not isinstance(currency, str):
+#             raise TypeError('Неверный тип валюты')
+#         elif len(currency) != 3:
+#             raise NameError('Неверная длина названия валюты')
+#         elif currency != currency.upper() and len(currency) == 3:
+#             raise ValueError('Название должно состоять только из заглавных букв')
+#         else:
+#             self.currency = currency
+#
+#     def __eq__(self, other):
+#         if isinstance(other, Wallet):
+#             if other.currency != self.currency:
+#                 raise ValueError('Нельзя сравнить разные валюты')
+#             return other.balance == self.balance
+#         if isinstance(other, int):
+#             raise TypeError(f'Wallet не поддерживает сравнение с {other}')
+#
+#     def __add__(self, other):
+#         if isinstance(other, Wallet):
+#             if other.currency == self.currency:
+#                 return Wallet(self.currency, self.balance + other.balance)
+#         if isinstance(other, int):
+#             raise ValueError('Данная операция запрещена')
+#
+#     def __sub__(self, other):
+#         if isinstance(other, Wallet):
+#             if other.currency == self.currency:
+#                 return Wallet(self.currency, self.balance - other.balance)
+#         if isinstance(other, int):
+#             raise ValueError('Данная операция запрещена')
+
+# wallet1 = Wallet('USD', 50)
+# wallet2 = Wallet('RUB', 100)
+# wallet3 = Wallet('RUB', 150)
+# # wallet4 = Wallet(12, 150)  # исключение TypeError('Неверный тип валюты')
+# # wallet5 = Wallet('qwerty', 150)  # исключение NameError('Неверная длина названия валюты')
+# # wallet6 = Wallet('abc', 150)  # исключение ValueError('Название должно состоять только из заглавных букв')
+# print(wallet2 == wallet3)  # False
+# # print(wallet2 == 100)  # TypeError('Wallet не поддерживает сравнение с 100')
+# # print(wallet2 == wallet1)  # ValueError('Нельзя сравнить разные валюты')
+# wallet7 = wallet2 - wallet3
+# print(wallet7.currency, wallet7.balance)  # печатает 'RUB 250'
+# wallet2 + 45  # ValueError('Данная операция запрещена')
+
+# def third():
+#     print('third start')
+#     print('third end')
+#
+# def second():
+#     print('second start')
+#     try:
+#         1/0
+#     except ZeroDivisionError:
+#         print('На ноль делить нелзя')
+#     third()
+#     print('second end')
+#
+#
+# def first():
+#     print('First start')
+#     second()
+#     print('First end')
+#
+# print('Hello')
+# first()
+
+# try:
+#     1/0
+#     int('joon')
+#     a + b
+# except ZeroDivisionError:
+#     print('eroDivisionError')
+# except ValueError:
+#     print('invalid literal for int(), only digit')
+# except Exception:
+#     print('eroDivisionError')
+
+# d = 'hello'
+# c = {}
+# try:
+#     d[15]
+#     c['key']
+# except (IndexError, KeyError) as error:
+#     print(f'Loddind error: {repr(error)}')
+#     raise #TypeError from None # if you want see last error
+# else:
+#     print('good') # you can see 'good' if try without exception
+# finally:
+#     print('end')
+
+#users exceptions++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# class MyExceptions(Exception):
+#     '''This is my first exception'''
+#
+#     def __init__(self, *args):
+#         if args:
+#             self.massage = args[0]
+#         else:
+#             self.massage = None
+#
+#     def __str__(self):
+#         if self.massage:
+#             return f'MyExceptions {self.massage}'
+#         else:
+#             return 'MyExceptions is empty'
+#
+# d = MyExceptions('hello', 15)
+# raise d
+# # try:
+# #     raise MyExceptions('it work')
+# # except Exception:
+# #     print('done')
+
+# class River:
+#     # список всех рек
+#     all_rivers = []
+#
+#     def __init__(self, name, length):
+#         self.name = name
+#         self.length = length
+#         # добавляем текущую реку в список всех рек
+#         River.all_rivers.append(self)
+#
+#     def __str__(self):
+#         return f'{self.name} {self.length}'
+#
+#
+# volga = River("Волга", 3530)
+# seine = River("Сена", 776)
+# nile = River("Нил", 6852)
+#
+# # далее печатаем все названия рек
+# for river in River.all_rivers:
+#     print(river.name)
+
+# class Book:
+#
+#     def __init__(self, name, author):
+#         self.name = name
+#         self.author = author
+#
+#     def __str__(self):
+#         return f'{self.name} - {self.author}'
+#
+# a = Book(input(), input())
+# b = Book(input(), input())
+# c = Book(input(), input())
+# print(a)
+# print(b)
+# print(c)
 
 
+# class Movie:
+#     def __init__(self, title,director, year):
+#         self.title = title
+#         self.year = year
+#         self.director = director
+#
+#     def __str__(self):
+#         return f'«{self.title}» (реж. {self.director}, {self.year})'
+#
+# # objects of the class Movie
+# titanic = Movie('Титаник', 'Джеймс Кэмерон', '1997')
+# star_wars = Movie('Звездные войны', 'Джордж Лукас', '1977')
+# fight_club = Movie('Бойцовский клуб', 'Дэвид Финчер', '1999')
+#
+# # don't delete this code
+# # it is here to check your results
+# print(titanic.title)
+# print(star_wars.year)
+# print(fight_club.director)
+# print(Movie(star_wars))
 
+# class Student:
+# 
+#     def __init__(self, name, last_name, birth_year):
+#         self.name = name[0]
+#         self.last_name = last_name
+#         self.birth_year = birth_year
+# 
+#     def __str__(self):
+#         return f'{self.name}{self.last_name}{self.birth_year}'
+# 
+# n = Student(name=input(), last_name=input(), birth_year=input())
+# 
+# print(n)
