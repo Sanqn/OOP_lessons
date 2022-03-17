@@ -2226,36 +2226,36 @@
 # a.add_money(50,234)
 # print(a)
 
-class Pet:
-    kind = "mammal"
-    n_pets = 0
-    pet_names = []
-
-    def __init__(self, spec, name):
-        self.spec = spec
-        self.name = name
-        self.legs = 4
-
-    def __str__(self):
-        return f'{self.name} {self.spec}'
-
-    def add_p(self):
-        Pet.n_pets += 1
-
-    def addlist(self):
-        Pet.pet_names.append(self.name)
-
-tom = Pet("cat", "Tom")
-tom.add_p()
-avocado = Pet("dog", "Avocado")
-avocado.add_p()
-ben = Pet("goldfish", "Benjamin")
-ben.add_p()
-tom.addlist()
-avocado.addlist()
-ben.addlist()
-print(Pet.n_pets)
-print(Pet.pet_names)
+# class Pet:
+#     kind = "mammal"
+#     n_pets = 0
+#     pet_names = []
+#
+#     def __init__(self, spec, name):
+#         self.spec = spec
+#         self.name = name
+#         self.legs = 4
+#
+#     def __str__(self):
+#         return f'{self.name} {self.spec}'
+#
+#     def add_p(self):
+#         Pet.n_pets += 1
+#
+#     def addlist(self):
+#         Pet.pet_names.append(self.name)
+#
+# tom = Pet("cat", "Tom")
+# tom.add_p()
+# avocado = Pet("dog", "Avocado")
+# avocado.add_p()
+# ben = Pet("goldfish", "Benjamin")
+# ben.add_p()
+# tom.addlist()
+# avocado.addlist()
+# ben.addlist()
+# print(Pet.n_pets)
+# print(Pet.pet_names)
 
 
 
