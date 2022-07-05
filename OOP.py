@@ -1,7 +1,7 @@
 # class Cat:
 #     name = 'Micki'
 #     color = 'black'
-
+hj
 # print(Cat.name)
 # print(Cat.__dict__)
 # print(getattr(Cat, 'color')) #black
