@@ -2258,35 +2258,93 @@
 # print(Pet.pet_names)
 
 
-class CPU:
-    def __init__(self, name, fr):
+# class CPU:
+#     def __init__(self, name, fr):
+#         self.name = name
+#         self.fr = fr
+#
+#
+# class Memory:
+#     def __init__(self, name, volume):
+#         self.name = name
+#         self.volume = volume
+#
+#
+# class MotherBoard:
+#
+#     def __init__(self, name, cpu,  *args):
+#         self.name = name
+#         self.cpu = cpu
+#         self.total_mem_slots = 4
+#         self.mem_slots = args[:self.total_mem_slots]
+#
+#     def get_config(self):
+#         return[
+#             f"Материнская плата: {self.name}",
+#             f"Центральный процессор: {self.cpu.name}, {self.cpu.fr}",
+#             f"Слотов памяти: {self.total_mem_slots}",
+#             "Память: " + '; '.join(map(lambda x: f"{x.name} - {x.volume}", self.mem_slots))
+#         ]
+#
+#
+# cpu = CPU('asus', 1333)
+# mb = MotherBoard('Asus', cpu, Memory('Kingstone', 4000), Memory('Kingstone', 4000))
+# print(mb.get_config())
+
+
+class Cart:
+
+    def __init__(self, goods=[]):
+        self.goods = goods
+
+    def add(self, gd):
+        self.goods.append(gd)
+
+    def remove(self, indx):
+        self.goods.pop(indx)
+
+    def get_list(self):
+        all_goods = []
+        for i in self.goods:
+            all_goods.append(f'{i.name}: {i.price}')
+        return all_goods
+
+
+class Product:
+    def __init__(self, name, price):
         self.name = name
-        self.fr = fr
+        self.price = price
 
 
-class Memory:
-    def __init__(self, name, volume):
-        self.name = name
-        self.volume = volume
+class Table(Product):
+    pass
 
 
-class MotherBoard:
-
-    def __init__(self, name, cpu,  *args):
-        self.name = name
-        self.cpu = cpu
-        self.total_mem_slots = 4
-        self.mem_slots = args[:self.total_mem_slots]
-
-    def get_config(self):
-        return[
-            f"Материнская плата: {self.name}",
-            f"Центральный процессор: {self.cpu.name}, {self.cpu.fr}",
-            f"Слотов памяти: {self.total_mem_slots}",
-            "Память: " + '; '.join(map(lambda x: f"{x.name} - {x.volume}", self.mem_slots))
-        ]
+class TV(Product):
+    pass
 
 
-cpu = CPU('asus', 1333)
-mb = MotherBoard('Asus', cpu, Memory('Kingstone', 4000), Memory('Kingstone', 4000))
-print(mb.get_config())
+class Notebook(Product):
+    pass
+
+
+class Cup(Product):
+    pass
+
+
+cart = Cart()
+
+tv1 = TV("samsung", 1111)
+tv2 = TV("LG", 1234)
+table = Table("ikea", 2345)
+n1 = Notebook("msi", 5433)
+n2 = Notebook("apple", 542)
+c = Cup("keepcup", 43)
+
+cart.add(tv1)
+cart.add(tv2)
+cart.add(table)
+cart.add(n1)
+cart.add(n2)
+cart.add(c)
+print(cart.get_list())
