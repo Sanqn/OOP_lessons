@@ -1878,7 +1878,8 @@
 # p.can_cure()
 # p.can_build() # class Person(Doctor, Builder) first find in Doctor I am doctor i can build too
 # p.can_build() # class Person(Builder, Doctor) first find in Builder I am builder i can build
-# print(Person.__mro__) # (<class '__main__.Person'>, <class '__main__.Doctor'>, <class '__main__.Builder'>, <class 'object'>)
+# print(Person.__mro__) # (<class '__main__.Person'>, <class '__main__.Doctor'>, <class '__main__.Builder'>,
+# <class 'object'>)
 # p.graduate()
 # print(p) #Person Lord, 5
 
@@ -2348,23 +2349,78 @@
 # cart.add(n2)
 # cart.add(c)
 # print(cart.get_list())
-import sys
+# import sys
+#
+#
+# class ListObject:
+#
+#     def __init__(self, data):
+#         self.next_obj = None
+#         self.data = data
+#
+#     def link(self, obj):
+#         self.next_obj = obj
+#
+#
+# lst_in = list(map(str.strip, sys.stdin.readlines()))
+# head_obj = ListObject(lst_in[0])
+# obj = head_obj
+# for i in range(1, len(lst_in)):
+#     obj_new = ListObject(lst_in[i])
+#     obj.link(obj_new)
+#     obj = obj_new
+# from random import randint
+#
+#
+# class Cell:
+#
+#     def __init__(self, around_mines=0, mine=False, fl_open=True):
+#         self.around_mines = around_mines
+#         self.mine = mine
+#         self.fl_open = fl_open
+#
+#
+# class GamePole:
+#
+#     def __init__(self, N, M):
+#         self._n = N
+#         self._m = M
+#         self.pole = [[Cell() for _ in range(self._n)] for _ in range(self._n)]
+#         self.init()
+#
+#     def init(self):
+#         m = 0
+#         while m < self._m:
+#             i = randint(0, self._n - 1)
+#             j = randint(0, self._n - 1)
+#             if self.pole[i][j].mine:
+#                 continue
+#             self.pole[i][j].mine = True
+#             m += 1
+#         inde = (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)
+#         for x in range(self._n):
+#             for y in range(self._n):
+#                 if not self.pole[x][y].mine:
+#                     mines = sum((self.pole[x + i][y + j].mine for i, j in inde if
+#                                  0 <= x + i < self._n and 0 <= y + j < self._n))
+#                     self.pole[x][y].around_mines = mines
+#
+#     def show(self):
+#         for row in self.pole:
+#             print(*map(lambda x: '#' if not x.fl_open else x.around_mines if not x.mine else '*', row))
+#
+#
+# pole_game = GamePole(10, 12)
+# pole_game.show()
 
 
-class ListObject:
+n = 5
+a = [['#' for _ in range(5)] for _ in range(5)]
+for i in a:
+    print(*i)
+print()
 
-    def __init__(self, data):
-        self.next_obj = None
-        self.data = data
+b = [[0] * n for _ in range(n)]
 
-    def link(self, obj):
-        self.next_obj = obj
-
-
-lst_in = list(map(str.strip, sys.stdin.readlines()))
-head_obj = ListObject(lst_in[0])
-obj = head_obj
-for i in range(1, len(lst_in)):
-    obj_new = ListObject(lst_in[i])
-    obj.link(obj_new)
-    obj = obj_new
+for a in b:
+    print(a)
