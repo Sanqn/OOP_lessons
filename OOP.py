@@ -2422,7 +2422,7 @@ print()
 
 b = [[0] * n for _ in range(n)]
 
-for a in b:
-    print(a)
+for an in b:
+    print(an)
 
-    #test
+    #test1
