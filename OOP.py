@@ -2424,3 +2424,5 @@ b = [[0] * n for _ in range(n)]
 
 for a in b:
     print(a)
+
+    #test
