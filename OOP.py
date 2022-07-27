@@ -2369,49 +2369,49 @@
 #     obj_new = ListObject(lst_in[i])
 #     obj.link(obj_new)
 #     obj = obj_new
-from random import randint
-
-
-class Cell:
-
-    def __init__(self, around_mines=0, mine=False):
-        self.around_mines = around_mines
-        self.mine = mine
-        self.fl_open = True
-
-
-class GamePole:
-
-    def __init__(self, N, M):
-        self._n = N
-        self._m = M
-        self.pole = [[Cell() for _ in range(self._n)] for _ in range(self._n)]
-        self.init()
-
-    def init(self):
-        m = 0
-        while m < self._m:
-            i = randint(0, self._n - 1)
-            j = randint(0, self._n - 1)
-            if self.pole[i][j].mine:
-                continue
-            self.pole[i][j].mine = True
-            m += 1
-        inde = (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)
-        for x in range(self._n):
-            for y in range(self._n):
-                if not self.pole[x][y].mine:
-                    mines = sum((self.pole[x + i][y + j].mine for i, j in inde if
-                                 0 <= x + i < self._n and 0 <= y + j < self._n))
-                    self.pole[x][y].around_mines = mines
-
-    def show(self):
-        for row in self.pole:
-            print(*map(lambda x: '#' if not x.fl_open else x.around_mines if not x.mine else '*', row))
-
-
-pole_game = GamePole(10, 12)
-pole_game.show()
+# from random import randint
+#
+#
+# class Cell:
+#
+#     def __init__(self, around_mines=0, mine=False):
+#         self.around_mines = around_mines
+#         self.mine = mine
+#         self.fl_open = True
+#
+#
+# class GamePole:
+#
+#     def __init__(self, N, M):
+#         self._n = N
+#         self._m = M
+#         self.pole = [[Cell() for _ in range(self._n)] for _ in range(self._n)]
+#         self.init()
+#
+#     def init(self):
+#         m = 0
+#         while m < self._m:
+#             i = randint(0, self._n - 1)
+#             j = randint(0, self._n - 1)
+#             if self.pole[i][j].mine:
+#                 continue
+#             self.pole[i][j].mine = True
+#             m += 1
+#         inde = (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)
+#         for x in range(self._n):
+#             for y in range(self._n):
+#                 if not self.pole[x][y].mine:
+#                     mines = sum((self.pole[x + i][y + j].mine for i, j in inde if
+#                                  0 <= x + i < self._n and 0 <= y + j < self._n))
+#                     self.pole[x][y].around_mines = mines
+#
+#     def show(self):
+#         for row in self.pole:
+#             print(*map(lambda x: '#' if not x.fl_open else x.around_mines if not x.mine else '*', row))
+#
+#
+# pole_game = GamePole(10, 12)
+# pole_game.show()
 # test
 
 
@@ -2437,3 +2437,123 @@ pole_game.show()
 # func2(n)
 # print(func2(n))
 
+# class Point:
+#
+#     def __new__(cls, *args, **kwargs):
+#         print('Вызов new для ' + str(cls))
+#         se = []
+#         for i in args:
+#             se.append(i)
+#         print(sum(se), 'sum')
+#         return f"Вот это {args}"
+#
+#     def __init__(self, x=0, y=0):
+#         self.x = x
+#         self.y = y
+#
+#     def __str__(self):
+#         return self.x, self.y
+#
+#
+# pt = Point(1, 2)
+# print(pt)
+
+# class DataBase:
+#     __instance = None
+#
+#     def __new__(cls, *args, **kwargs):
+#         if cls.__instance is None:
+#             cls.__instance = super().__new__(cls)
+#         return cls.__instance
+#
+#     def __del__(self):
+#         DataBase.__instance = None
+#
+#     def __init__(self, user, psw, port):
+#         if not hasattr(self, 'user'):
+#             self.user = user
+#             self.psw = psw
+#             self.port = port
+#
+#     def connect(self):
+#         print(f'User is connect {self.user}, {self.port}, {self.psw}')
+#
+#     def close(self):
+#         return f'Connection is complite'
+#
+#
+# db1 = DataBase('Nick', 'root', 8080)
+# db2 = DataBase('Joom', 'admin', 4040)
+# print(id(db1), id(db2))
+# db1.connect()
+# db2.connect()
+
+# class AbstractClass:
+#
+#     def __new__(cls, *args, **kwargs):
+#         return f"Ошибка: нельзя создавать объекты абстрактного класса"
+#
+#     def __init__(self):
+#         pass
+#
+#
+# obj = AbstractClass()
+
+# class SingletonFive:
+#     __instances = None
+#
+#     def __new__(cls, *args, **kwargs):
+#         a = int(''.join([*args]))
+#         if a < 4:
+#             return super().__new__(cls)
+#         else:
+#             if cls.__instances is None:
+#                 cls.__instances = super().__new__(cls)
+#             return cls.__instances
+#
+#     def __init__(self, name):
+#         self.name = name
+#
+#
+# objs = [SingletonFive(str(n)) for n in range(10)]
+# for i in objs:
+#     print(i)
+
+# TYPE_OS = 1  # 1 - Windows; 2 - Linux
+#
+#
+# class DialogWindows:
+#     name_class = "DialogWindows"
+#
+#
+# class DialogLinux:
+#     name_class = "DialogLinux"
+#
+#
+# class Dialog:
+#     def __new__(cls, *args, **kwargs):
+#         if TYPE_OS == 1:
+#             pc = super().__new__(DialogWindows)
+#         else:
+#             pc = super().__new__(DialogLinux)
+#         pc.name = args[0]
+#         return pc
+#
+#
+# pc = Dialog('name')
+# print(pc)
+
+class Point:
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def clone(self):
+        return Point(self.x, self.y)
+
+
+pt = Point(1, 2)
+pt_clone = pt.clone()
+print(id(pt))
+print(id(pt_clone))
