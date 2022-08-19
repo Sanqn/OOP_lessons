@@ -2415,7 +2415,6 @@
 # test
 
 
-#
 # n = 5
 # a = [['#' for _ in range(5)] for _ in range(5)]
 # for i in a:
@@ -2543,17 +2542,187 @@
 # pc = Dialog('name')
 # print(pc)
 
-class Point:
+# class Point:
+#
+#     def __init__(self, x, y):
+#         self.x = x
+#         self.y = y
+#
+#     def clone(self):
+#         return Point(self.x, self.y)
+#
+#
+# pt = Point(1, 2)
+# pt_clone = pt.clone()
+# print(id(pt))
+# print(id(pt_clone))
 
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+# Здесь объявляется класс Factory
 
-    def clone(self):
-        return Point(self.x, self.y)
+# class Factory:
+#     def build_sequence(self):
+#         return []
+#
+#     def build_number(self, string):
+#         return string
+#
+#
+# class Loader:
+#     def parse_format(self, string, factory):
+#         seq = factory.build_sequence()
+#         for sub in string.split(","):
+#             item = factory.build_number(float(sub))
+#             seq.append(item)
+#
+#         return seq
+#
+#
+# # эти строчки не менять!
+# ld = Loader()
+# s = input()
+# res = ld.parse_format(s, Factory())
+# print(res)
 
 
-pt = Point(1, 2)
-pt_clone = pt.clone()
-print(id(pt))
-print(id(pt_clone))
+# class One:
+#     def __init__(self, a):
+#         self.a = a
+#
+#     def return_a(self):
+#         t = Two()
+#         t.work_bot(self.a)
+#         t.test()
+#
+#
+# class Two:
+#
+#     def work_bot(self, a):
+#         print(a * 2)
+#
+#     def test(self):
+#         print(2 + 2)
+#
+#
+# on = One(5)
+# on.return_a()
+
+# class Point:
+#     MAX_cor = 100
+#     MIN_cor = 1
+#
+#     @classmethod
+#     def validator(cls, arg):
+#         return cls.MIN_cor <= arg <= cls.MAX_cor
+#
+#     def __init__(self, x, y):
+#         self.x = self.y = 0
+#         if self.validator(x) and self.validator(y):  # Point.validator(x) and Point.validator(y) с self правельнее
+#             # if Point.MIN_cor < x < Point.MAX_cor and Point.MIN_cor < y < Point.MAX_cor: можно без @classmethod,
+#             # обратиться напрямую к атрибутам класса
+#             self.x = x
+#             self.y = y
+#             print(
+#                 self.notm2(self.x, self.y))  # можно обратиться к стаатик методу и в методе Point.notm2(self.x, self.y)
+#
+#     def get_point(self):
+#         print(self.notm2(self.x, self.y))
+#         return self.x, self.y
+#
+#     @staticmethod
+#     def notm2(x, y):
+#         return x * x + y * y
+#
+#
+# print(Point.validator(5))
+# pt = Point(2, 100)
+# print(pt.get_point())
+# print(Point.notm2(3, 4), '<- staticmethod')
+#
+#
+# class Factory:
+#     @staticmethod
+#     def build_sequence():
+#         return []
+#
+#     @staticmethod
+#     def build_number(string):
+#         return string
+#
+#
+# class Loader:
+#     @staticmethod
+#     def parse_format(string, factory):
+#         seq = factory.build_sequence()
+#         for sub in string.split(","):
+#             item = factory.build_number(float(sub))
+#             seq.append(item)
+#
+#         return seq
+#
+# res = Loader.parse_format("1, 2, 3, -5, 10", Factory)
+# print(res)
+
+from string import ascii_lowercase, digits
+
+
+class TextInput:
+    CHARS = "абвгдеёжзийклмнопрстуфхцчшщьыъэюя " + ascii_lowercase
+    CHARS_CORRECT = CHARS + CHARS.upper() + digits
+
+    @classmethod
+    def check_name(cls, name):
+        check = []
+        for i in name:
+            if i in cls.CHARS_CORRECT:
+                check.append(i)
+        return len(check) == len(name) and 3 <= len(name) <= 50
+
+    def __init__(self, name, size=10):
+        if self.check_name(name):
+            self.name = name
+            self.size = size
+        else:
+            raise ValueError("некорректное поле name")
+
+    def get_html(self):
+        return f"<p class='login'>{self.name}: <input type='text' size={self.size}/>"
+
+
+class PasswordInput:
+    CHARS = "абвгдеёжзийклмнопрстуфхцчшщьыъэюя " + ascii_lowercase
+    CHARS_CORRECT = CHARS + CHARS.upper() + digits
+
+    @classmethod
+    def check_name(cls, name):
+        check = []
+        for i in name:
+            if i in cls.CHARS_CORRECT:
+                check.append(i)
+        return len(check) == len(name) and 3 <= len(name) <= 50
+
+    def __init__(self, name, size=10):
+        if self.check_name(name):
+            self.name = name
+            self.size = size
+
+    def get_html(self):
+        return f"<p class='password'>{self.name}: <input type='text' size={self.size}/>"
+
+
+class FormLogin:
+    def __init__(self, lgn, psw):
+        self.login = lgn
+        self.password = psw
+
+    def render_template(self):
+        return "\n".join(['<form action="#">', self.login.get_html(), self.password.get_html(), '</form>'])
+
+
+# эти строчки не менять
+login = FormLogin(TextInput("Логин"), PasswordInput("Пароль"))
+html = login.render_template()
+print(html)
+
+
+
+
